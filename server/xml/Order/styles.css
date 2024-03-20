@@ -1,0 +1,61 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+orders {
+    width: 90%;
+    margin: auto;
+    font-size: xx-large;
+    display: table;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+order {
+
+    border: 1px solid black;
+    display: table-row;
+    width: 100%;
+
+}
+
+order:first-child {
+    color: white;
+    background-color: black;
+}
+
+ OrderNo{
+    display: table-cell;
+    border: 1px solid black;
+}
+
+
+OrderDate {
+    display: table-cell;
+    border: 1px solid black;
+}
+CustNo {
+    display: table-cell;
+    border: 1px solid black;
+}
+ProductCode {
+    display: table-cell;
+    border: 1px solid black;
+}
+ProductName {
+    display: table-cell;
+    border: 1px solid black;
+}
+ProductQuantity {
+    display: table-cell;
+    border: 1px solid black;
+}
+ProductPrice {
+    display: table-cell;
+    border: 1px solid black;
+}
+Total {
+    display: table-cell;
+    border: 1px solid black;
+    padding: 10px 20px;
+}

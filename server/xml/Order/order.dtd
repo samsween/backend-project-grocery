@@ -1,0 +1,11 @@
+<!ELEMENT orders (order+)>
+<!ELEMENT order (OrderNo, OrderDate, CustNo, ProductCode, ProductName,ProductQuantity, ProductPrice, Total)>
+<!ELEMENT OrderNo (#PCDATA)>
+<!ELEMENT OrderDate (#PCDATA)>
+<!ELEMENT CustNo (#PCDATA)>
+<!ELEMENT ProductCode (#PCDATA)>
+<!ELEMENT ProductName (#PCDATA)>
+<!ELEMENT ProductQuantity (#PCDATA)>
+<!ELEMENT ProductPrice (#PCDATA)>
+<!ELEMENT Total (#PCDATA)>
+<!ATTLIST order ModeOfPayment CDATA #REQUIRED>

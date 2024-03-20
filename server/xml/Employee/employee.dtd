@@ -1,0 +1,6 @@
+
+<!ELEMENT employees (employee+)>
+<!ELEMENT employee (Username, Password)>
+<!ELEMENT Username (#PCDATA)>
+<!ELEMENT Password (#PCDATA)>
+<!ATTLIST employee Empid ID #REQUIRED>

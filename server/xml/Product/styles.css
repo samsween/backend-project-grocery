@@ -1,0 +1,46 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+products {
+    width: 90%;
+    margin: auto;
+    font-size: xx-large;
+    display: table;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+product {
+
+    border: 1px solid black;
+    display: table-row;
+    width: 100%;
+
+}
+
+product:first-child {
+    color: white;
+    background-color: black;
+}
+
+ProductCode {
+    display: table-cell;
+    border: 1px solid black;
+}
+
+
+ProductName {
+    display: table-cell;
+    border: 1px solid black;
+}
+
+ProductQuantity {
+    display: table-cell;
+    border: 1px solid black;
+}
+ProuctPrice {
+    display: table-cell;
+    border: 1px solid black;
+    padding: 10px 20px;
+}

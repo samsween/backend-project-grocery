@@ -1,0 +1,38 @@
+
+    * {
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    employees {
+        width: 90%;
+        margin: auto;
+        font-size: xx-large;
+        display: table;
+        border-collapse: collapse;
+        overflow-x: auto;
+    }
+
+    employee {
+    
+        border: 1px solid black;
+        display: table-row;
+        width: 100%;
+        
+    }
+    employee:first-child {
+        color: white;
+        background-color: black;
+    }
+    Username {
+        display: table-cell;
+        border: 1px solid black;
+    }
+
+
+    Password {
+        display: table-cell;
+        border: 1px solid black;
+        padding: 10px 20px;
+    }
+
+

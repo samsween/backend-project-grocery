@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./script.js" defer></script>
+</head>
+
+<body>
+    <div class="h-full bg-slate-200 w-full min-h-screen ">
+        <header class="w-full bg-slate-800 py-10 text-white">
+            <div class="w-4/5 m-auto flex justify-between flex-col lg:flex-row gap-4 lg:gap-0">
+                <h1 class="text-3xl">XML Data</h1>
+                <input type="text" class="lg:w-1/4 w-full h-10 text-black" id="search" placeholder="Search...">
+                <select class="w-1/4 h-10 text-black" id="select">
+                    <option value="Products">Products</option>
+                    <option value="Employees">Employees</option>
+                    <option value="Orders">Orders</option>
+                </select>
+            </div>
+        </header>
+        <div class=" w-full lg:w-4/5 m-auto overflow-x-auto">
+
+            <table class="w-full text-gray-800 border mt-10 text-md overflow-x-auto" id="table">
+
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+
+
+</script>
+
+</html>

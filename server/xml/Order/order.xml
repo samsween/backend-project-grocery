@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="styles.css" type="text/css"?>
+<!DOCTYPE orders SYSTEM "order.dtd">
+<orders>
+    <order ModeOfPayment="Cash">
+        <OrderNo>OrderNo</OrderNo>
+        <OrderDate>OrderDate</OrderDate>
+        <CustNo>CustNo</CustNo>
+        <ProductCode>ProductCode</ProductCode>
+        <ProductName>ProductName</ProductName>
+        <ProductQuantity>ProductQuantity</ProductQuantity>
+        <ProductPrice>ProductPrice</ProductPrice>
+        <Total>Total</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1001</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>9876598765</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>3</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>270</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1002</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>4213598734</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>5</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>450</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1003</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>2342342341</CustNo>
+        <ProductCode>6</ProductCode>
+        <ProductName>Toothbrush</ProductName>
+        <ProductQuantity>2</ProductQuantity>
+        <ProductPrice>40</ProductPrice>
+        <Total>80</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1004</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>8890102345</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>Shampoo</ProductName>
+        <ProductQuantity>15</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>300</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1005</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>7008945671</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>1</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>90</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1006</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>9090909000</CustNo>
+        <ProductCode>6</ProductCode>
+        <ProductName>Toothbrush</ProductName>
+        <ProductQuantity>10</ProductQuantity>
+        <ProductPrice>40</ProductPrice>
+        <Total>400</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1007</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>5437896510</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>50</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>100</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1008</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>7879797979</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>10</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>900</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1009</OrderNo>
+        <OrderDate>24/05/2022</OrderDate>
+        <CustNo>2200222012</CustNo>
+        <ProductCode>6</ProductCode>
+        <ProductName>Toothbrush</ProductName>
+        <ProductQuantity>4</ProductQuantity>
+        <ProductPrice>40</ProductPrice>
+        <Total>160</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1010</OrderNo>
+        <OrderDate>25/05/2022</OrderDate>
+        <CustNo>5467458791</CustNo>
+        <ProductCode>6</ProductCode>
+        <ProductName>Toothbrush</ProductName>
+        <ProductQuantity>9</ProductQuantity>
+        <ProductPrice>40</ProductPrice>
+        <Total>360</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1011</OrderNo>
+        <OrderDate>24/05/2022</OrderDate>
+        <CustNo>4346356289</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>6</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>120</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1012</OrderNo>
+        <OrderDate>26/05/2022</OrderDate>
+        <CustNo>7645745199</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>50</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>4500</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1013</OrderNo>
+        <OrderDate>24/05/2022</OrderDate>
+        <CustNo>7887348888</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>2</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>40</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1014</OrderNo>
+        <OrderDate>24/05/2022</OrderDate>
+        <CustNo>4367543876</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>5</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>450</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1015</OrderNo>
+        <OrderDate>24/05/2022</OrderDate>
+        <CustNo>880888880</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>12</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>1080</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1016</OrderNo>
+        <OrderDate>30/05/2022</OrderDate>
+        <CustNo>4377764728</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>15</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>1350</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1017</OrderNo>
+        <OrderDate>24/05/2022</OrderDate>
+        <CustNo>9823473469</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>20</ProductQuantity>
+        <ProductPrice>90</ProductPrice>
+        <Total>1800</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1018</OrderNo>
+        <OrderDate>27/05/2022</OrderDate>
+        <CustNo>8789798999</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>100</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>2000</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1019</OrderNo>
+        <OrderDate>23/05/2022</OrderDate>
+        <CustNo>5654638289</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>20</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>400</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1020</OrderNo>
+        <OrderDate>24/05/2022</OrderDate>
+        <CustNo>9887689456</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>70</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>1400</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1021</OrderNo>
+        <OrderDate>26/05/2022</OrderDate>
+        <CustNo>9876598765</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>3</ProductQuantity>
+        <ProductPrice>20</ProductPrice>
+        <Total>60</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1022</OrderNo>
+        <OrderDate>27/05/2022</OrderDate>
+        <CustNo>8789798999</CustNo>
+        <ProductCode>4</ProductCode>
+        <ProductName>P_biscuit</ProductName>
+        <ProductQuantity>2</ProductQuantity>
+        <ProductPrice>10</ProductPrice>
+        <Total>20</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1023</OrderNo>
+        <OrderDate>30/05/2022</OrderDate>
+        <CustNo>9823473469</CustNo>
+        <ProductCode>4</ProductCode>
+        <ProductName>P_biscuit</ProductName>
+        <ProductQuantity>5</ProductQuantity>
+        <ProductPrice>11</ProductPrice>
+        <Total>75</Total>
+    </order>
+    <order ModeOfPayment="Cash">
+        <OrderNo>1024</OrderNo>
+        <OrderDate>02/06/2022</OrderDate>
+        <CustNo>9090909000</CustNo>
+        <ProductCode>9</ProductCode>
+        <ProductName>shampoo</ProductName>
+        <ProductQuantity>20</ProductQuantity>
+        <ProductPrice>22</ProductPrice>
+        <Total>440</Total>
+    </order>
+    <order ModeOfPayment="Online">
+        <OrderNo>1025</OrderNo>
+        <OrderDate>02/06/2022</OrderDate>
+        <CustNo>8789798999</CustNo>
+        <ProductCode>1</ProductCode>
+        <ProductName>Edible oil</ProductName>
+        <ProductQuantity>10</ProductQuantity>
+        <ProductPrice>99</ProductPrice>
+        <Total>990</Total>
+    </order>
+
+</orders>
