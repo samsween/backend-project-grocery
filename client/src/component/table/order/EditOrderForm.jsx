@@ -16,8 +16,8 @@ export const EditOrderForm = ({ id }) => {
   return (
     <>
       {order && (
-        <form className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2">
+        <form className="flex flex-col gap-2 p-10">
+          <div className="flex flex-col gap-2 ">
             <label htmlFor="orderNumber">Order Number</label>
             <input
               type="text"
