@@ -13,6 +13,15 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
+}, {
+  toJSON: {
+    getters: true,
+    virtuals: true
+  }
 });
+
+employeeSchema.methods.comparePassword = function (password) {
+  return password === this.password;
+};
 
 module.exports = mongoose.model("Employee", employeeSchema);

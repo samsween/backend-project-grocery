@@ -55,10 +55,10 @@ const productService = {
   },
 };
 
-const userService = {
+const authService = {
   async register(user) {
     try {
-      const response = await axios.post(`${API_URL}/users/register`, user);
+      const response = await axios.post(`${API_URL}/auth/register`, user);
       return response.data;
     } catch (error) {
       return { error: error.response.data };
@@ -66,7 +66,9 @@ const userService = {
   },
   async login(user) {
     try {
-      const response = await axios.post(`${API_URL}/users/login`, user);
+      const response = await axios.post(`${API_URL}/auth/login`, user, {
+        withCredentials: true,
+      });
       return response.data;
     } catch (error) {
       return { error: error.response.data };
@@ -74,7 +76,7 @@ const userService = {
   },
   async logout() {
     try {
-      const response = await axios.post(`${API_URL}/users/logout`, {
+      const response = await axios.post(`${API_URL}/auth/logout`, {
         withCredentials: true,
       });
       return response.data;
@@ -84,12 +86,12 @@ const userService = {
   },
   async getUser() {
     try {
-      const response = await axios.get(`${API_URL}/users`, {
+      const response = await axios.get(`${API_URL}/auth/me`, {
         withCredentials: true,
       });
       return response.data;
     } catch (error) {
-      return { error: error.response.data };
+      throw err.response.data.error;
     }
   },
 };
@@ -137,4 +139,4 @@ const orderService = {
   },
 };
 
-export { productService, userService, orderService };
+export { productService, authService, orderService };

@@ -1,23 +1,15 @@
-import axios from "axios";
-import { createContext } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { userService } from "../utils/services";
-export const AuthContext = createContext(null);
 
+import { createContext, useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { authService } from "../utils/services";
+const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  useQuery("me", async () => {
-    try {
-      const data = await userService.getUser();
-      setUser(data);
-    } catch (error) {
-      setUser(null);
-    }
-  });
+  const {isLoading, data} = useQuery({ queryKey: ['user'], queryFn: authService.getUser });
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user: data }}>{children}</AuthContext.Provider>
   );
 };
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext).user;

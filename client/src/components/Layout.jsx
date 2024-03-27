@@ -1,10 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../providers/authProvider";
 
 export const Layout = () => {
+  const user = useAuth();
+  console.log(user);
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
   return (
     <>
       <Header />
       <main className="container mx-auto py-8">
+        
         <Outlet />
       </main> 
     </>
