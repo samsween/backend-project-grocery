@@ -22,7 +22,7 @@ connect()
     await Promise.all(
       products.map(async (p) => {
         await Product.create({
-          poductQuantity: p.ProductQuantity,
+          productQuantity: p.ProductQuantity,
           productCode: p.ProductCode,
           productName: p.ProductName,
           productPrice: p.Product_price,
