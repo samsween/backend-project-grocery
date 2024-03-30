@@ -1,28 +1,37 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../providers/authProvider";
-
+import { authService } from "../utils/services";
 export const Layout = () => {
   const user = useAuth();
-  console.log(user);
-  if (!user) {
+
+  if (!user.user) {
     return <Navigate to="/login" />;
   }
+
   return (
     <>
       <Header />
-      <main className="container mx-auto py-8">
-        
-        <Outlet />
-      </main> 
+      <main className="bg-gradient-to-br from-indigo-500 to-indigo-300 min-h-screen w-full">
+        <div className="container mx-auto py-32">
+          <Outlet />
+        </div>
+      </main>
     </>
   );
 };
 
 const Header = () => {
+  const user = useAuth();
+  const logout = () => {
+    authService.logout().then((data) => {
+      user.setUser(null);
+      location.reload();
+    });
+  };
   return (
-    <header className="w-full bg-slate-900 text-white py-8 ">
+    <header className="w-full bg-white bg-opacity-30 py-8 fixed ">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl">Store</h1>
+        <h1 className="text-2xl">ADMIN</h1>
         <nav>
           <ul className="flex gap-4 items-center">
             <li>
@@ -31,19 +40,23 @@ const Header = () => {
               </a>
             </li>
             <li>
-              <a href="/products" className="hover:underline">
-                Products
-              </a>
+              <Link to={"/admin/products"}>Products</Link>
             </li>
             <li>
-              <a href="/employees" className="hover:underline">
-                Employees
-              </a>
+              <Link to={"/admin/employees"}>Employees</Link>
             </li>
             <li>
-              <a href="/orders" className="hover:underline">
-                Orders
-              </a>
+              <Link to={"/admin/orders"}>Orders</Link>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  logout();
+                }}
+                className="hover:underline"
+              >
+                Logout
+              </button>
             </li>
           </ul>
         </nav>

@@ -76,7 +76,7 @@ const authService = {
   },
   async logout() {
     try {
-      const response = await axios.post(`${API_URL}/auth/logout`, {
+      const response = await axios.delete(`${API_URL}/auth/logout`, {
         withCredentials: true,
       });
       return response.data;
@@ -139,4 +139,24 @@ const orderService = {
   },
 };
 
-export { productService, authService, orderService };
+const employeeService = {
+  async getEmployees() {
+    try {
+      const response = await axios.get(`${API_URL}/employees`);
+      return response.data;
+    } catch (error) {
+      return { error: error.response.data };
+    }
+  },
+  async getEmployee(id) {
+    try {
+      const response = await axios.get(`${API_URL}/employees/${id}`);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      return { error: error.response.data };
+    }
+  },
+};
+
+export { productService, authService, orderService, employeeService };

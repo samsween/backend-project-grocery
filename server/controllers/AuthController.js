@@ -1,6 +1,5 @@
 const Employee = require("../models/Employee");
 const { signJwt } = require("../utils/jwt");
-
 const authController = {
   register: async (req, res) => {
     try {
@@ -42,16 +41,21 @@ const authController = {
           secure: false,
           maxAge: 1000 * 60 * 60,
         })
-        .json({ success: true });
+        .json({
+          success: true,
+          user: {
+            id: employee._id,
+            username: employee.username,
+          },
+        });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
   },
-  logout: async (req, res) => {
-    res.clearCookie("token").status(200).json({ success: true });
+  logout: (req, res) => {
+    res.clearCookie("token").json({ message: "Logged out" });
   },
   getAuth: async (req, res) => {
-
     res.status(200).json(req.user);
   },
 };
