@@ -42,11 +42,8 @@ const authController = {
           maxAge: 1000 * 60 * 60,
         })
         .json({
-          success: true,
-          user: {
-            id: employee._id,
-            username: employee.username,
-          },
+          id: employee._id,
+          username: employee.username,
         });
     } catch (error) {
       return res.status(400).json({ message: error.message });

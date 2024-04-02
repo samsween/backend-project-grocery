@@ -1,7 +1,7 @@
 import { getOrders } from "@/api/orders";
 import { useQuery } from "@tanstack/react-query";
-import { DataTable } from "../data-table";
 import { orderColumns } from "./order-columns";
+import { DataTable } from "../data-table";
 export default function Orders() {
   const { data, isLoading } = useQuery({
     queryKey: ["orders"],

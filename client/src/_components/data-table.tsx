@@ -1,15 +1,18 @@
 import {
   ColumnDef,
   SortingState,
-  flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   getFilteredRowModel,
   ColumnFiltersState,
   useReactTable,
+  flexRender,
 } from "@tanstack/react-table";
 
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -18,9 +21,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -32,50 +32,31 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState<string>("");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
     data,
     columns,
-    initialState: { pagination: { pageSize: 9 } },
+    initialState: { pagination: { pageSize: 9 }, globalFilter },
     onSortingChange: setSorting,
+    onGlobalFilterChange: setGlobalFilter,
     getSortedRowModel: getSortedRowModel(),
-    state: { sorting, columnFilters },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    state: { sorting, globalFilter, columnFilters },
   });
-  //   const [typeOfFilter, setTypeOfFilter] = useState<string>(
-  //     table.getAllColumns()[0].id
-  //   );
-
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter Product Names..."
-          value={
-            (table.getColumn("productName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("productName")?.setFilterValue(event.target.value)
-          }
+          placeholder="Search"
+          value={globalFilter ?? ""}
+          onChange={(event) => setGlobalFilter(String(event.target.value))}
           className="max-w-sm"
         />
-        {/* <select
-          value={typeOfFilter}
-          onChange={(event) => setTypeOfFilter(event.target.value)}
-          className="ml-2"
-        >
-          {table.getAllColumns().map((column) => {
-            if (column.id === "Actions") return null;
-            return (
-              <option key={column.id} value={column.id}>
-                {column.id}
-              </option>
-            );
-          })}
-        </select> */}
       </div>
       <div className="rounded-md border shadow-md">
         <Table>
@@ -148,3 +129,16 @@ export function DataTable<TData, TValue>({
     </div>
   );
 }
+
+// const GlobalFilter = ({ globalFilter, setGlobalFilter }: {
+//   globalFilee
+// }) => {
+//   return (
+//     <input
+//       value={globalFilter || ""}
+//       onChange={(e) => setGlobalFilter(e.target.value)}
+//       placeholder="Search all columns..."
+//       className="text-input-class"
+//     />
+//   );
+// };

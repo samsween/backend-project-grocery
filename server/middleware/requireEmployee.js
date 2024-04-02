@@ -6,6 +6,7 @@ function verifyToken(req, res, next) {
   if (!token) return res.status(401).json({ message: "Access denied" });
   try {
     const user = verifyJwt(token);
+    console.log(user);
     req.user = user;
     next();
   } catch (err) {
