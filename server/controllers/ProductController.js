@@ -4,7 +4,15 @@ const productController = {
   getAllProducts: async (req, res) => {
     try {
       const products = await Product.find({}, { __v: 0 });
-      res.json(products);
+      const productsWithImagePath = products.map((product) => {
+        return {
+          ...product._doc,
+          imagePath: product.imageName
+            ? `http://localhost:3000/images/${product.imageName}`
+            : null,
+        };
+      });
+      res.json(productsWithImagePath);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -24,6 +32,19 @@ const productController = {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
+  },
+  addProduct: async (req, res) => {
+    // const imageName = await addImageToS3(req.file.buffer);
+    const imageName = req.file.filename;
+    console.log(req.file.filename);
+    const product = await Product.create({
+      productCode: req.body.productCode,
+      productName: req.body.productName,
+      productPrice: req.body.productPrice,
+      productQuantity: req.body.productQuantity,
+      imageName: imageName,
+    });
+    res.json({});
   },
 };
 

@@ -15,6 +15,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use("/api", apiRoutes);
+app.use("/images", express.static("images"));
 
 connectDB().then(() => {
   app.listen(process.env.PORT || PORT, () => {

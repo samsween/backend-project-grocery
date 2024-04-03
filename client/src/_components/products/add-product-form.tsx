@@ -36,15 +36,16 @@ export function AddProductForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    //
     const formData = new FormData();
     formData.append("productCode", values.productCode);
     formData.append("productName", values.productName);
-    formData.append("price", values.price.toString());
-    formData.append("quantity", values.quantity.toString());
+    formData.append("productPrice", values.price.toString());
+    formData.append("productQuantity", values.quantity.toString());
     if (values.image) {
       formData.append("image", values.image[0]);
     }
-    console.log(formData.getAll("image"));
+    console.log(formData.get("image"));
     await addProduct(formData);
   }
   const fileRef = form.register("image");

@@ -20,9 +20,6 @@ const addProduct = async (product: any) => {
   await fetch(`${API_URL}/products`, {
     method: "POST",
     body: product,
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
   });
 };
 

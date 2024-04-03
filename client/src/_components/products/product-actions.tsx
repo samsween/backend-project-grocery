@@ -34,6 +34,7 @@ export default function ProductActions({ product }: { product: Product }) {
   const queryClient = useQueryClient();
   const [isDeleteOpen, setisDeleteOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isImageOpen, setIsImageOpen] = useState(false);
   const { mutateAsync, isPending } = useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => {
@@ -88,6 +89,14 @@ export default function ProductActions({ product }: { product: Product }) {
           >
             Delete
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => {
+              setIsImageOpen(true);
+            }}
+          >
+            View Image
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
@@ -96,6 +105,20 @@ export default function ProductActions({ product }: { product: Product }) {
             <DialogTitle>Edit Product Details</DialogTitle>
           </DialogHeader>
           <ProductForm product={product} />
+        </DialogContent>
+      </Dialog>
+      <Dialog open={isImageOpen} onOpenChange={setIsImageOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Product Image</DialogTitle>
+          </DialogHeader>
+          <DialogDescription>
+            {product.imagePath ? (
+              <img src={product.imagePath} alt={product.productName} />
+            ) : (
+              "No image available"
+            )}
+          </DialogDescription>
         </DialogContent>
       </Dialog>
     </>
