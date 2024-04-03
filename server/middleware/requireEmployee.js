@@ -2,11 +2,9 @@ const { verifyJwt } = require("../utils/jwt");
 require("dotenv").config();
 function verifyToken(req, res, next) {
   const token = req.cookies["token"];
-  console.log(token);
   if (!token) return res.status(401).json({ message: "Access denied" });
   try {
     const user = verifyJwt(token);
-    console.log(user);
     req.user = user;
     next();
   } catch (err) {
