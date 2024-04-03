@@ -8,19 +8,23 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { addProduct } from "@/api/products";
 
 const formSchema = z.object({
   productCode: z.string().min(3).max(10),
   productName: z.string().min(3).max(10),
-  price: z.number().min(0),
-  quantity: z.number().min(0),
+  price: z.string().min(0),
+  quantity: z.string().min(0),
+  image: z
+    .instanceof(FileList)
+    .refine((file) => file?.length == 1, "File is required.")
+    .optional(),
 });
 
 export function AddProductForm() {
@@ -29,19 +33,29 @@ export function AddProductForm() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    const formData = new FormData();
+    formData.append("productCode", values.productCode);
+    formData.append("productName", values.productName);
+    formData.append("price", values.price.toString());
+    formData.append("quantity", values.quantity.toString());
+    if (values.image) {
+      formData.append("image", values.image[0]);
+    }
+    console.log(formData.getAll("image"));
+    await addProduct(formData);
   }
+  const fileRef = form.register("image");
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 shadow p-8 w-full "
+        className="space-y-8 "
+        encType="multipart/form-data"
       >
-        <h1 className="text-2xl font-semibold">Add Product</h1>
         <FormField
           control={form.control}
           name="productCode"
@@ -92,6 +106,19 @@ export function AddProductForm() {
               <FormLabel>Quantity</FormLabel>
               <FormControl>
                 <Input placeholder="Quantity" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Image</FormLabel>
+              <FormControl>
+                <Input type="file" placeholder="Image" {...fileRef} />
               </FormControl>
               <FormMessage />
             </FormItem>
