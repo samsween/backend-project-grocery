@@ -21,12 +21,7 @@ connect()
     );
     await Promise.all(
       products.map(async (p) => {
-        await Product.create({
-          productQuantity: p.ProductQuantity,
-          productCode: p.ProductCode,
-          productName: p.ProductName,
-          productPrice: p.Product_price,
-        });
+        await Product.create(p);
       })
     );
     await Promise.all(

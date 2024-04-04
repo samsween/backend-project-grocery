@@ -15,11 +15,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { addProduct } from "@/api/products";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const formSchema = z.object({
-  productCode: z.string().min(3).max(10),
-  productName: z.string().min(3).max(10),
-  price: z.string().min(0),
+  productCode: z.string().min(1).max(4),
+  productName: z.string().min(3).max(30),
+  price: z.string().min(1),
   quantity: z.string().min(0),
   image: z
     .instanceof(FileList)
@@ -27,16 +28,26 @@ const formSchema = z.object({
     .optional(),
 });
 
-export function AddProductForm() {
+export function AddProductForm({
+  setOpen,
+}: {
+  setOpen: (value: boolean) => void;
+}) {
+  const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: addProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
+      setOpen(false);
+    },
+  });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    //
     const formData = new FormData();
     formData.append("productCode", values.productCode);
     formData.append("productName", values.productName);
@@ -45,8 +56,7 @@ export function AddProductForm() {
     if (values.image) {
       formData.append("image", values.image[0]);
     }
-    console.log(formData.get("image"));
-    await addProduct(formData);
+    await mutateAsync(formData);
   }
   const fileRef = form.register("image");
 
@@ -125,7 +135,9 @@ export function AddProductForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isPending}>
+          Submit
+        </Button>
       </form>
     </Form>
   );

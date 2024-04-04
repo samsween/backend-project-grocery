@@ -17,10 +17,18 @@ const getProduct = async (id: string) => {
 };
 
 const addProduct = async (product: any) => {
-  await fetch(`${API_URL}/products`, {
+  const res = await fetch(`${API_URL}/products`, {
     method: "POST",
     body: product,
   });
+  return res.json();
+};
+const editProduct = async (product: { id: string; product: any }) => {
+  const response = await fetch(`${API_URL}/products/${product.id}`, {
+    method: "PUT",
+    body: product.product,
+  });
+  return response.json();
 };
 
-export { getProducts, deleteProduct, getProduct, addProduct };
+export { getProducts, deleteProduct, getProduct, addProduct, editProduct };

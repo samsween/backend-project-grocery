@@ -1,98 +1,72 @@
 [
- {
-   "ProductCode": 1,
-   "ProductName": "Edible oil",
-   "ProductQuantity": 300,
-   "Product_price": 90
- },
- {
-   "ProductCode": 6,
-   "ProductName": "Toothbrush",
-   "ProductQuantity": 50,
-   "Product_price": 40
- },
- {
-   "ProductCode": 9,
-   "ProductName": "shampoo",
-   "ProductQuantity": 100,
-   "Product_price": 20
- },
- {
-   "ProductCode": 1,
-   "ProductName": "Edible oil",
-   "ProductQuantity": 100,
-   "Product_price": 90
- },
- {
-   "ProductCode": 1,
-   "ProductName": "Edible oil",
-   "ProductQuantity": 30,
-   "Product_price": 90
- },
- {
-   "ProductCode": 9,
-   "ProductName": "shampoo",
-   "ProductQuantity": 50,
-   "Product_price": 20
- },
- {
-   "ProductCode": 6,
-   "ProductName": "Toothbrush",
-   "ProductQuantity": 100,
-   "Product_price": 40
- },
- {
-   "ProductCode": 9,
-   "ProductName": "shampoo",
-   "ProductQuantity": 200,
-   "Product_price": 20
- },
- {
-   "ProductCode": 1,
-   "ProductName": "Edible oil",
-   "ProductQuantity": 300,
-   "Product_price": 90
- },
- {
-   "ProductCode": 9,
-   "ProductName": "shampoo",
-   "ProductQuantity": 80,
-   "Product_price": 20
- },
- {
-   "ProductCode": 1,
-   "ProductName": "Edible oil",
-   "ProductQuantity": 500,
-   "Product_price": 90
- },
- {
-   "ProductCode": 6,
-   "ProductName": "Toothbrush",
-   "ProductQuantity": 150,
-   "Product_price": 40
- },
- {
-   "ProductCode": 9,
-   "ProductName": "shampoo",
-   "ProductQuantity": 200,
-   "Product_price": 20
- },
- {
-   "ProductCode": 4,
-   "ProductName": "P_Biscuits",
-   "ProductQuantity": 50,
-   "Product_price": 10
- },
- {
-   "ProductCode": 4,
-   "ProductName": "P_Biscuits",
-   "ProductQuantity": 50,
-   "Product_price": 10
- },
- {
-   "ProductCode": 8,
-   "ProductName": "Cornflakes",
-   "ProductQuantity": 40,
-   "Product_price": 60
- }
+  {
+    "productCode": 1,
+    "productName": "Swift Glider",
+    "productQuantity": 2,
+    "productPrice": 94,
+    "imageName": "1.jpg"
+  },
+  {
+    "productCode": 2,
+    "productName": "Urban Runner",
+    "productQuantity": 6,
+    "productPrice": 38,
+    "imageName": "2.jpg"
+  },
+  {
+    "productCode": 3,
+    "productName": "Eternal Stride",
+    "productQuantity": 4,
+    "productPrice": 93,
+    "imageName": "3.jpg"
+  },
+  {
+    "productCode": 4,
+    "productName": "Mystic Pathfinder",
+    "productQuantity": 7,
+    "productPrice": 67,
+    "imageName": "4.jpg"
+  },
+  {
+    "productCode": 5,
+    "productName": "Rebel Pioneer",
+    "productQuantity": 5,
+    "productPrice": 92,
+    "imageName": "5.jpg"
+  },
+  {
+    "productCode": 6,
+    "productName": "Cosmic Voyager",
+    "productQuantity": 7,
+    "productPrice": 91,
+    "imageName": "6.jpg"
+  },
+  {
+    "productCode": 7,
+    "productName": "Infinite Navigator",
+    "productQuantity": 4,
+    "productPrice": 7,
+    "imageName": "7.jpg"
+  },
+  {
+    "productCode": 8,
+    "productName": "Stealth Champion",
+    "productQuantity": 6,
+    "productPrice": 5,
+    "imageName": "8.jpg"
+  },
+  {
+    "productCode": 9,
+    "productName": "Dynamic Crusader",
+    "productQuantity": 3,
+    "productPrice": 97,
+    "imageName": "9.jpg"
+  },
+  {
+    "productCode": 10,
+    "productName": "Vortex Explorer",
+    "productQuantity": 4,
+    "productPrice": 76,
+    "imageName": "10.jpg"
+  }
 ]

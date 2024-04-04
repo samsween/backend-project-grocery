@@ -104,7 +104,7 @@ export default function ProductActions({ product }: { product: Product }) {
           <DialogHeader>
             <DialogTitle>Edit Product Details</DialogTitle>
           </DialogHeader>
-          <ProductForm product={product} />
+          <ProductForm product={product} setOpen={setIsEditOpen} />
         </DialogContent>
       </Dialog>
       <Dialog open={isImageOpen} onOpenChange={setIsImageOpen}>

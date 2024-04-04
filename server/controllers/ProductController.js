@@ -1,4 +1,11 @@
 const Product = require("../models/Product");
+const fs = require("fs");
+
+const deleteFile = async (filename) => {
+  await fs.unlink(filename, (err) => {
+    return;
+  });
+};
 
 const productController = {
   getAllProducts: async (req, res) => {
@@ -20,9 +27,15 @@ const productController = {
   getOneProduct: async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);
-      res.json(product);
+      const productWithImagePath = {
+        ...product._doc,
+        imagePath: product.imageName
+          ? `http://localhost:3000/images/${product.imageName}`
+          : null,
+      };
+      return res.json(productWithImagePath);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      return res.status(500).json({ message: error.message });
     }
   },
   deleteProduct: async (req, res) => {
@@ -44,7 +57,29 @@ const productController = {
       productQuantity: req.body.productQuantity,
       imageName: imageName,
     });
-    res.json({});
+    res.json(product);
+  },
+  editProduct: async (req, res) => {
+    const imageName = req.file?.filename;
+    if (imageName) {
+      const prevImageName = await Product.findById(req.params.id);
+      console.log(prevImageName);
+      await deleteFile(`images/${prevImageName.imageName}`);
+    }
+    const { body } = req;
+
+    try {
+      let prod = await Product.updateOne(
+        { _id: req.params.id },
+        {
+          ...body,
+          imageName: imageName,
+        }
+      );
+      res.json(prod);
+    } catch (err) {
+      return res.json({ error: err });
+    }
   },
 };
 
