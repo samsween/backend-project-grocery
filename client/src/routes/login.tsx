@@ -1,37 +1,25 @@
-import { signIn } from "@/api/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/providers/authProvider";
-import {
-  Link,
-  createFileRoute,
-  redirect,
-  useRouter,
-} from "@tanstack/react-router";
+import useAuth, { isLoggedIn } from "@/hooks/useAuth";
+import { Link, createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/login")({
   component: () => <Login />,
-  beforeLoad: async ({ context }) => {
-    const { authentication } = context;
-    if (authentication.user?.id) {
-      throw redirect({ to: "/" });
+  beforeLoad: async () => {
+    const loggedIn = await isLoggedIn();
+    if (loggedIn) {
+      throw redirect({ to: "/admin" });
     }
   },
 });
 
 const Login = () => {
-  const auth = useAuth();
-  const router = useRouter();
-  // "Luc45", "AxGP7831@!";
-  const loginUser = () => {
-    signIn("Luc45", "AxGP7831@!").then((data) => {
-      if (data?.id) {
-        auth.setUser(data);
-        router.navigate({
-          to: "/",
-        });
-      }
+  const user = useAuth();
+  const loginUser = async () => {
+    user.login({
+      username: "Luc45",
+      password: "AxGP7831@!",
     });
   };
   return (

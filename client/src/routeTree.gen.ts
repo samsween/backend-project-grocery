@@ -12,14 +12,13 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as StoreImport } from './routes/store'
-import { Route as ProfileImport } from './routes/profile'
 import { Route as LoginImport } from './routes/login'
-import { Route as AdminImport } from './routes/_admin'
+import { Route as AdminImport } from './routes/admin'
 import { Route as StoreIndexImport } from './routes/store/index'
-import { Route as AdminIndexImport } from './routes/_admin.index'
-import { Route as AdminProductsImport } from './routes/_admin.products'
-import { Route as AdminOrdersImport } from './routes/_admin.orders'
-import { Route as AdminEmployeesImport } from './routes/_admin.employees'
+import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as AdminProductsImport } from './routes/admin/products'
+import { Route as AdminOrdersImport } from './routes/admin/orders'
+import { Route as AdminEmployeesImport } from './routes/admin/employees'
 import { Route as StoreProductsIndexImport } from './routes/store/products.index'
 import { Route as StoreProductsIdImport } from './routes/store/products.$id'
 
@@ -30,18 +29,13 @@ const StoreRoute = StoreImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ProfileRoute = ProfileImport.update({
-  path: '/profile',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const LoginRoute = LoginImport.update({
   path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
 const AdminRoute = AdminImport.update({
-  id: '/_admin',
+  path: '/admin',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -84,7 +78,7 @@ const StoreProductsIdRoute = StoreProductsIdImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_admin': {
+    '/admin': {
       preLoaderRoute: typeof AdminImport
       parentRoute: typeof rootRoute
     }
@@ -92,27 +86,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/profile': {
-      preLoaderRoute: typeof ProfileImport
-      parentRoute: typeof rootRoute
-    }
     '/store': {
       preLoaderRoute: typeof StoreImport
       parentRoute: typeof rootRoute
     }
-    '/_admin/employees': {
+    '/admin/employees': {
       preLoaderRoute: typeof AdminEmployeesImport
       parentRoute: typeof AdminImport
     }
-    '/_admin/orders': {
+    '/admin/orders': {
       preLoaderRoute: typeof AdminOrdersImport
       parentRoute: typeof AdminImport
     }
-    '/_admin/products': {
+    '/admin/products': {
       preLoaderRoute: typeof AdminProductsImport
       parentRoute: typeof AdminImport
     }
-    '/_admin/': {
+    '/admin/': {
       preLoaderRoute: typeof AdminIndexImport
       parentRoute: typeof AdminImport
     }
@@ -141,7 +131,6 @@ export const routeTree = rootRoute.addChildren([
     AdminIndexRoute,
   ]),
   LoginRoute,
-  ProfileRoute,
   StoreRoute.addChildren([
     StoreIndexRoute,
     StoreProductsIdRoute,

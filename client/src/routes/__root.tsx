@@ -1,12 +1,11 @@
 import { Toaster } from "@/components/ui/toaster";
-import { UserContext } from "@/providers/authProvider";
 
-import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
-type RouterContext = {
-  authentication: UserContext;
-};
+import { Outlet, createRootRoute } from "@tanstack/react-router";
+// type RouterContext = {
+//   authentication: UserContext;
+// };
 
-export const Route = createRootRouteWithContext<RouterContext>()({
+export const Route = createRootRoute({
   component: () => (
     <>
       <Outlet />

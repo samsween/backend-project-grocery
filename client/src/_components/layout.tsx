@@ -1,4 +1,3 @@
-import { logOut } from "@/api/auth";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -6,13 +5,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useAuth } from "@/providers/authProvider";
-import {
-  Link,
-  Outlet,
-  useRouter,
-  useRouterState,
-} from "@tanstack/react-router";
+import useAuth from "@/hooks/useAuth";
+import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import {
   Home,
   LogOut,
@@ -24,14 +18,10 @@ import {
 } from "lucide-react";
 
 export const Layout = () => {
-  const router = useRouter();
-  const routerState = useRouterState();
   const auth = useAuth();
-  const logout = async () => {
-    logOut().then(() => {
-      auth.setUser(null);
-      router.invalidate();
-    });
+  const routerState = useRouterState();
+  const logout = () => {
+    auth.logout();
   };
   return (
     <TooltipProvider delayDuration={10}>
@@ -48,7 +38,7 @@ export const Layout = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  to="/"
+                  to="/admin"
                   className={
                     routerState.location.pathname === "/"
                       ? "flex h-9 w-9 items-center justify-center rounded-lg bg-muted  text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
@@ -64,7 +54,7 @@ export const Layout = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  to="/orders"
+                  to="/admin/orders"
                   className={
                     routerState.location.pathname.includes("/orders")
                       ? "flex h-9 w-9 items-center justify-center rounded-lg bg-muted  text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
@@ -80,7 +70,7 @@ export const Layout = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  to="/products"
+                  to="/admin/products"
                   className={
                     routerState.location.pathname.includes("/products")
                       ? "flex h-9 w-9 items-center justify-center rounded-lg bg-muted  text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
@@ -96,7 +86,7 @@ export const Layout = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  to="/employees"
+                  to="/admin/employees"
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                 >
                   <Users2 className="h-5 w-5" />
@@ -135,7 +125,13 @@ export const Layout = () => {
           </nav>
         </aside>
         <main className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-          <Outlet />
+          {auth.isLoading ? (
+            <div className="flex items-center justify-center h-screen w-full">
+              <div className="animate-spin h-10 w-10 border-t-2 border-b-2 border-primary rounded-full"></div>
+            </div>
+          ) : (
+            <Outlet />
+          )}
         </main>
       </div>
     </TooltipProvider>
