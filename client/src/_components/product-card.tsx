@@ -6,47 +6,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useCartHook } from "@/hooks/useCart";
 import { CartProduct, useCart } from "@/providers/cartProivder";
-import { Product } from "@/types/types";
 import { CircleX } from "lucide-react";
-import { useState } from "react";
 
 export const ProductCard = ({ product }: { product: CartProduct }) => {
-  const cart = useCart();
-  const onDelete = () => {
-    const { _id } = product;
-    if (cart?.cart) {
-      const newProducts = cart.cart.products.filter((a) => a._id !== _id);
-      const newTotal = newProducts.reduce((a, b) => a + b.productPrice, 0);
-      const newCart = { products: newProducts, total: newTotal };
-      cart.setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-    }
-  };
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (parseInt(e.target.value) === 0) return onDelete();
-    if (cart?.cart?.products.length) {
-      if (cart.cart.products.find((prod) => prod._id === product._id)) {
-        const updatedQuantity = cart.cart.products.map((prod) => {
-          if (prod._id === product._id && prod.quantity) {
-            let newQuant = parseInt(e.target.value);
-            return { ...prod, quantity: newQuant };
-          }
+  const cart = useCartHook();
 
-          return prod;
-        });
-        cart.setCart({
-          products: updatedQuantity,
-          total: updatedQuantity.reduce((a, b) => {
-            if (b.quantity) return a + b.productPrice * b.quantity;
-            return a + b.productPrice;
-          }, 0),
-        });
-      }
+  const onDelete = () => {
+    console.log("Deleting");
+    cart.removeFromCart(product._id, true);
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (parseInt(e.target.value) <= 0) {
+      cart.removeFromCart(product._id, true);
+      return;
     }
+    cart.addToCart(product, parseInt(e.target.value));
   };
   return (
-    <Card className="w-full max-w-xs min-w-fit relative" key={product._id}>
+    <Card className="w-full max-w-xs min-w-fit relative">
       <CircleX className="absolute right-0 top-0 z-[100]" onClick={onDelete} />
       <div className="aspect-w-4 aspect-h-5 relative">
         <img

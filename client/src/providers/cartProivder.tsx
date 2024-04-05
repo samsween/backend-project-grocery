@@ -4,10 +4,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 export type CartProduct = Product & {
   quantity: number | null;
 };
-
-type Cart = {
-  products: CartProduct[];
-  total: number;
+export type Cart = {
+  products: { [key: string]: CartProduct };
 };
 
 export type CartContext = {
@@ -30,6 +28,11 @@ export const CartContextProvider = ({
       setCart(JSON.parse(cart));
     }
   }, []);
+  useEffect(() => {
+    if (cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
   return (
     <CartContext.Provider value={{ cart, setCart }}>
       {children}

@@ -1,12 +1,11 @@
 import { getProduct } from "@/api/products";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { useCart } from "@/providers/cartProivder";
+import { useCartHook } from "@/hooks/useCart";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/store/products/$id")({
+export const Route = createFileRoute("/_store/products/$id")({
   component: () => <Product />,
 });
 
@@ -18,50 +17,18 @@ const Product = () => {
     queryKey: [`product-${id}`],
     queryFn: async () => getProduct(id),
   });
-  const cart = useCart();
+  const cart = useCartHook();
   const addToCart = () => {
-    let newCart;
-    if (cart?.cart?.products.length) {
-      if (cart.cart.products.find((prod) => prod._id === id)) {
-        const updatedQuantity = cart.cart.products.map((prod) => {
-          if (prod._id === id && prod.quantity) {
-            let newQuant = prod.quantity + 1;
-            return { ...prod, quantity: newQuant };
-          }
-
-          return prod;
-        });
-        console.log(updatedQuantity);
-        newCart = {
-          products: updatedQuantity,
-          total: updatedQuantity.reduce((a, b) => {
-            if (b.quantity) return a + b.productPrice * b.quantity;
-            return a + b.productPrice;
-          }, 0),
-        };
-      } else {
-        newCart = {
-          products: [...cart.cart?.products, { ...data, quantity: 1 }],
-          total: [...cart.cart?.products, data].reduce((a, b) => {
-            if (b.quantity)
-              return (
-                parseInt(a) + parseInt(b.productPrice) * parseInt(b.quantity)
-              );
-            return parseInt(a) + parseInt(b.productPrice);
-          }, 0),
-        };
-      }
-    } else {
-      newCart = {
-        products: [{ ...data, quantity: 1 }],
-        total: parseInt(data.productPrice),
-      };
-    }
-    cart?.setCart(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
+    cart.addToCart(data);
     toast({
       title: "Added to cart!",
-      description: `Added ${data.productName} to cart.`,
+      description: (
+        <>
+          <h1 className="text-2xl font-semibold">{data.productName}</h1>
+          <img src={data.imagePath} alt="Product" className="w-16 h-16" />
+          <p>{data.productName} added to cart</p>
+        </>
+      ),
     });
   };
   if (isLoading) return <div>Loading...</div>;
@@ -81,7 +48,6 @@ const Product = () => {
           <h1 className="text-3xl font-semibold">{data.productName}</h1>
           <p>ID: {data._id}</p>
           <h3 className="text-xl">${parseInt(data.productPrice).toFixed(2)}</h3>
-          <Input type="number" className="w-fit" defaultValue={1} />
           <Button className="w-full" variant="outline" onClick={addToCart}>
             Add To Cart
           </Button>

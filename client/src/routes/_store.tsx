@@ -1,6 +1,5 @@
-import { CartContextProvider, useCart } from "@/providers/cartProivder";
-import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { ShoppingCart } from "lucide-react";
+import { ProductCard } from "@/_components/product-card";
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -9,16 +8,16 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+import { useCartHook } from "@/hooks/useCart";
+import { CartContextProvider } from "@/providers/cartProivder";
+import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
+import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import { ProductCard } from "@/_components/product-card";
 
-export const Route = createFileRoute("/store")({
+export const Route = createFileRoute("/_store")({
   component: () => <StoreLayout />,
 });
-
 const StoreLayout = () => {
   return (
     <CartContextProvider>
@@ -39,7 +38,7 @@ const StoreLayout = () => {
 };
 
 const Header = () => {
-  const cart = useCart();
+  const cart = useCartHook();
   const [cartOpen, setCartOpen] = useState<boolean>(false);
 
   return (
@@ -50,16 +49,16 @@ const Header = () => {
           <nav>
             <ul className="flex gap-4 items-center">
               <li>
-                <a href="/store">Home</a>
+                <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <a href="/store/products">Products</a>
+                <Link to={"/products"}>Products</Link>
               </li>
               <li
                 className="relative cursor-pointer"
                 onClick={() => setCartOpen(true)}
               >
-                {cart?.cart?.products.length !== 0 && (
+                {cart.cart?.cart?.products && (
                   <div className="absolute h-2 text-white w-2 -right-1 -top-1 bg-red-500 text-xs text-center rounded-full"></div>
                 )}
                 <ShoppingCart />
@@ -72,13 +71,15 @@ const Header = () => {
         <DrawerContent className="container mx-auto">
           <DrawerHeader>
             <DrawerTitle className="text-4xl">
-              Total ${cart?.cart?.total}
+              Total ${cart.total.toFixed(2)}
             </DrawerTitle>
 
             <DrawerDescription className="flex gap-2 overflow-x-scroll">
-              {cart?.cart?.products.map((product) => {
-                return <ProductCard product={product} />;
-              })}
+              {Object.values(cart.cart?.cart?.products || {}).map(
+                (product, i) => (
+                  <ProductCard key={i} product={product} />
+                )
+              )}
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>

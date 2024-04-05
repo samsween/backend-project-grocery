@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/store/")({
+export const Route = createFileRoute("/_store/")({
   component: () => <Store />,
 });
 
@@ -64,26 +64,3 @@ const Store = () => {
     </main>
   );
 };
-
-/* <Card className="w-full max-w-sm">
-          <div className="aspect-w-4 aspect-h-5 relative">
-            <img
-              alt="Product"
-              className="object-cover rounded-t-lg"
-              height={500}
-              src="/placeholder.svg"
-              style={{
-                aspectRatio: "400/500",
-                objectFit: "cover",
-              }}
-              width={400}
-            />
-          </div>
-          <CardHeader className="grid gap-1 p-4">
-            <CardTitle>Product</CardTitle>
-            <CardDescription>Best product ever</CardDescription>
-          </CardHeader>
-          <CardContent className="p-4">
-            <p className="text-3xl font-semibold">$199</p>
-          </CardContent>
-        </Card> */

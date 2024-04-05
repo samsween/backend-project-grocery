@@ -1,13 +1,6 @@
 import { getProducts } from "@/api/products";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { useQuery } from "@tanstack/react-query";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -15,10 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowUpDown } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useMemo, useState } from "react";
+
+export const Route = createFileRoute("/_store/products/")({
+  component: () => <Products />,
+});
 
 const sortFunctions = {
   price: {
@@ -34,10 +31,6 @@ const sortFunctions = {
     dsc: () => 0,
   },
 };
-
-export const Route = createFileRoute("/store/products/")({
-  component: () => <Products />,
-});
 
 const Products = () => {
   const { data, isLoading } = useQuery({
@@ -104,39 +97,9 @@ const Products = () => {
       <div className="grid grid-cols-4 py-10 gap-10">
         {sortData?.map((product: any) => {
           return (
-            // <Card className="w-full " key={product._id}>
-            //   <Link
-            //     to={"/store/products/$id"}
-            //     params={{
-            //       id: product._id,
-            //     }}
-            //   >
-            //     <div className="aspect-w-4 aspect-h-5 relative">
-            //       <img
-            //         alt="Product"
-            //         className="object-cover rounded-t-lg"
-            //         height={500}
-            //         src={`${product.imagePath}`}
-            //         style={{
-            //           aspectRatio: "500/400",
-            //           objectFit: "cover",
-            //         }}
-            //       />
-            //     </div>
-            //     <CardHeader className="grid gap-1 p-4">
-            //       <CardTitle>{product.productName}</CardTitle>
-            //       <CardDescription>Best product ever</CardDescription>
-            //     </CardHeader>
-            //     <CardContent className="p-4 flex justify-between">
-            //       <p className="text-3xl font-semibold">
-            //         ${product.productPrice}
-            //       </p>
-            //     </CardContent>
-            //   </Link>
-            // </Card>
             <Card className="w-full max-w-xs rounded-xl border width">
               <Link
-                to={"/store/products/$id"}
+                to={"/products/$id"}
                 params={{
                   id: product._id,
                 }}

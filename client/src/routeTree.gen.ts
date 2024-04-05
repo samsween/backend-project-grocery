@@ -11,23 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as StoreImport } from './routes/store'
 import { Route as LoginImport } from './routes/login'
 import { Route as AdminImport } from './routes/admin'
-import { Route as StoreIndexImport } from './routes/store/index'
+import { Route as StoreImport } from './routes/_store'
 import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as StoreIndexImport } from './routes/_store/index'
 import { Route as AdminProductsImport } from './routes/admin/products'
 import { Route as AdminOrdersImport } from './routes/admin/orders'
 import { Route as AdminEmployeesImport } from './routes/admin/employees'
-import { Route as StoreProductsIndexImport } from './routes/store/products.index'
-import { Route as StoreProductsIdImport } from './routes/store/products.$id'
+import { Route as StoreProductsIndexImport } from './routes/_store/products/index'
+import { Route as StoreProductsIdImport } from './routes/_store/products/$id'
 
 // Create/Update Routes
-
-const StoreRoute = StoreImport.update({
-  path: '/store',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const LoginRoute = LoginImport.update({
   path: '/login',
@@ -39,14 +34,19 @@ const AdminRoute = AdminImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const StoreIndexRoute = StoreIndexImport.update({
-  path: '/',
-  getParentRoute: () => StoreRoute,
+const StoreRoute = StoreImport.update({
+  id: '/_store',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const AdminIndexRoute = AdminIndexImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
+} as any)
+
+const StoreIndexRoute = StoreIndexImport.update({
+  path: '/',
+  getParentRoute: () => StoreRoute,
 } as any)
 
 const AdminProductsRoute = AdminProductsImport.update({
@@ -78,16 +78,16 @@ const StoreProductsIdRoute = StoreProductsIdImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_store': {
+      preLoaderRoute: typeof StoreImport
+      parentRoute: typeof rootRoute
+    }
     '/admin': {
       preLoaderRoute: typeof AdminImport
       parentRoute: typeof rootRoute
     }
     '/login': {
       preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/store': {
-      preLoaderRoute: typeof StoreImport
       parentRoute: typeof rootRoute
     }
     '/admin/employees': {
@@ -102,19 +102,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProductsImport
       parentRoute: typeof AdminImport
     }
+    '/_store/': {
+      preLoaderRoute: typeof StoreIndexImport
+      parentRoute: typeof StoreImport
+    }
     '/admin/': {
       preLoaderRoute: typeof AdminIndexImport
       parentRoute: typeof AdminImport
     }
-    '/store/': {
-      preLoaderRoute: typeof StoreIndexImport
-      parentRoute: typeof StoreImport
-    }
-    '/store/products/$id': {
+    '/_store/products/$id': {
       preLoaderRoute: typeof StoreProductsIdImport
       parentRoute: typeof StoreImport
     }
-    '/store/products/': {
+    '/_store/products/': {
       preLoaderRoute: typeof StoreProductsIndexImport
       parentRoute: typeof StoreImport
     }
@@ -124,6 +124,11 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
+  StoreRoute.addChildren([
+    StoreIndexRoute,
+    StoreProductsIdRoute,
+    StoreProductsIndexRoute,
+  ]),
   AdminRoute.addChildren([
     AdminEmployeesRoute,
     AdminOrdersRoute,
@@ -131,11 +136,6 @@ export const routeTree = rootRoute.addChildren([
     AdminIndexRoute,
   ]),
   LoginRoute,
-  StoreRoute.addChildren([
-    StoreIndexRoute,
-    StoreProductsIdRoute,
-    StoreProductsIndexRoute,
-  ]),
 ])
 
 /* prettier-ignore-end */
