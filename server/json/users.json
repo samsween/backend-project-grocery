@@ -1,0 +1,92 @@
+[
+  {
+    "username": "DavidWilliams0",
+    "firstName": "David",
+    "lastName": "Williams",
+    "email": "davidwilliams0@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "GraceGarcia1",
+    "firstName": "Grace",
+    "lastName": "Garcia",
+    "email": "gracegarcia1@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "BobLopez2",
+    "firstName": "Bob",
+    "lastName": "Lopez",
+    "email": "boblopez2@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "HeidiSmith3",
+    "firstName": "Heidi",
+    "lastName": "Smith",
+    "email": "heidismith3@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "AliceGarcia4",
+    "firstName": "Alice",
+    "lastName": "Garcia",
+    "email": "alicegarcia4@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "DavidGarcia5",
+    "firstName": "David",
+    "lastName": "Garcia",
+    "email": "davidgarcia5@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "GraceGarcia6",
+    "firstName": "Grace",
+    "lastName": "Garcia",
+    "email": "gracegarcia6@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "FrankMartinez7",
+    "firstName": "Frank",
+    "lastName": "Martinez",
+    "email": "frankmartinez7@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "FrankGarcia8",
+    "firstName": "Frank",
+    "lastName": "Garcia",
+    "email": "frankgarcia8@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  },
+  {
+    "username": "EveLopez9",
+    "firstName": "Eve",
+    "lastName": "Lopez",
+    "email": "evelopez9@example.com",
+    "password": "password",
+    "role": "customer",
+    "cart": []
+  }
+]

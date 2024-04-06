@@ -4,7 +4,10 @@ const Product = require("../models/Product");
 const orderController = {
   getAllOrders: async (req, res) => {
     try {
-      const orders = await Order.find({}, { __v: 0 }).populate("product");
+      const orders = await Order.find({}, { __v: 0 }).populate([
+        "product",
+        "user",
+      ]);
       // .select(
       //   "orderNumber orderDate customerNumber productCode productName productPrice productQuantity totalAmount modeOfPayment"
       // );
@@ -16,7 +19,10 @@ const orderController = {
   },
   getOneOrder: async (req, res) => {
     try {
-      const order = await Order.findById(req.params.id).populate("product");
+      const order = await Order.findById(req.params.id).populate([
+        "product",
+        "user",
+      ]);
       res.json(order);
     } catch (error) {
       res.status(500).json({ message: error.message });

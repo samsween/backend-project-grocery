@@ -1,51 +1,16 @@
 const mongoose = require("mongoose");
-const orders = require("./orders.json");
 const products = require("./products.json");
-const employees = require("./employees.json");
-const Order = require("../models/Order");
-const Employee = require("../models/Employee");
+const users = require("./users.json");
+const User = require("../models/User");
 const Product = require("../models/Product");
 const connect = async () => {
   await mongoose.connect("mongodb://127.0.0.1:27017/myapp");
 };
-connect()
-  .then(async () => {
-    await Promise.all(
-      employees.map(async (e) => {
-        await Employee.create({
-          empId: e.Empid,
-          password: e.Password,
-          username: e.Username,
-        });
-      })
-    );
-    await Promise.all(
-      products.map(async (p) => {
-        await Product.create(p);
-      })
-    );
-    await Promise.all(
-      orders.map(async (o) => {
-        const productId = await Product.findOne({
-          productCode: o["Product Code"],
-        }).select("_id");
-        await Order.create({
-          customerNumber: o["CustNo."],
-          modeOfPayment: o["ModeOf Payment"],
-          orderDate: new Date(),
-          orderNumber: o["OrderNo."],
-          product: productId,
-          productQuantity: o["Product Quantity"],
-          totalAmount: o.Total,
-        });
-      })
-    );
-  })
-  .then(() => {
-    console.log("Data seeded");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.log(err);
-    process.exit(1);
-  });
+connect().then(async () => {
+  await User.deleteMany({});
+  await Product.deleteMany({});
+  await User.create(users);
+  await Product.create(products);
+  console.log("Data seeded successfully");
+  process.exit();
+});
