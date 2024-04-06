@@ -65,6 +65,8 @@ const descriptions = [
   "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
 ];
 
+const categories = ["Men", "Women"];
+
 const length = 10;
 
 const PRODUCTS = Array.from({ length }, (_, index) => ({
@@ -76,6 +78,8 @@ const PRODUCTS = Array.from({ length }, (_, index) => ({
   price: Math.floor(Math.random() * 100) + 1,
   stockQuantity: Math.floor(Math.random() * 10) + 1,
 }));
+
+const CATEGORIES = categories.map((name) => ({ name }));
 
 const USERS = Array.from({ length }, (_, index) => {
   const firstName = firstNames[randomNumber(firstNames.length)];
@@ -95,3 +99,4 @@ const USERS = Array.from({ length }, (_, index) => {
 
 fs.writeFileSync("products.json", JSON.stringify(PRODUCTS, null, 2));
 fs.writeFileSync("users.json", JSON.stringify(USERS, null, 2));
+fs.writeFileSync("categories.json", JSON.stringify(CATEGORIES, null, 2));

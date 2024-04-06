@@ -16,9 +16,9 @@ import { Route as AdminImport } from './routes/admin'
 import { Route as StoreImport } from './routes/_store'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as StoreIndexImport } from './routes/_store/index'
+import { Route as AdminUsersImport } from './routes/admin/users'
 import { Route as AdminProductsImport } from './routes/admin/products'
 import { Route as AdminOrdersImport } from './routes/admin/orders'
-import { Route as AdminEmployeesImport } from './routes/admin/employees'
 import { Route as StoreProductsIndexImport } from './routes/_store/products/index'
 import { Route as StoreProductsIdImport } from './routes/_store/products/$id'
 
@@ -49,6 +49,11 @@ const StoreIndexRoute = StoreIndexImport.update({
   getParentRoute: () => StoreRoute,
 } as any)
 
+const AdminUsersRoute = AdminUsersImport.update({
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+
 const AdminProductsRoute = AdminProductsImport.update({
   path: '/products',
   getParentRoute: () => AdminRoute,
@@ -56,11 +61,6 @@ const AdminProductsRoute = AdminProductsImport.update({
 
 const AdminOrdersRoute = AdminOrdersImport.update({
   path: '/orders',
-  getParentRoute: () => AdminRoute,
-} as any)
-
-const AdminEmployeesRoute = AdminEmployeesImport.update({
-  path: '/employees',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -90,16 +90,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/admin/employees': {
-      preLoaderRoute: typeof AdminEmployeesImport
-      parentRoute: typeof AdminImport
-    }
     '/admin/orders': {
       preLoaderRoute: typeof AdminOrdersImport
       parentRoute: typeof AdminImport
     }
     '/admin/products': {
       preLoaderRoute: typeof AdminProductsImport
+      parentRoute: typeof AdminImport
+    }
+    '/admin/users': {
+      preLoaderRoute: typeof AdminUsersImport
       parentRoute: typeof AdminImport
     }
     '/_store/': {
@@ -130,9 +130,9 @@ export const routeTree = rootRoute.addChildren([
     StoreProductsIndexRoute,
   ]),
   AdminRoute.addChildren([
-    AdminEmployeesRoute,
     AdminOrdersRoute,
     AdminProductsRoute,
+    AdminUsersRoute,
     AdminIndexRoute,
   ]),
   LoginRoute,

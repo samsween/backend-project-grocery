@@ -8,6 +8,7 @@ export default function Products() {
     queryKey: ["products"],
     queryFn: getProducts,
   });
+  console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;

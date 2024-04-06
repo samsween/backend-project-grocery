@@ -13,5 +13,13 @@ export default function Orders() {
     return <div>Loading...</div>;
   }
 
-  return <DataTable columns={orderColumns} data={data} />;
+  return (
+    <>
+      {data ? (
+        <DataTable columns={orderColumns} data={data} />
+      ) : (
+        <div>No orders yet</div>
+      )}
+    </>
+  );
 }

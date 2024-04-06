@@ -5,13 +5,24 @@ export interface Employee {
   password: string;
 }
 
+export interface User {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  role: string;
+}
+
 export interface Product {
   _id: string;
-  productCode: number;
-  productName: string;
-  productQuantity: number;
-  productPrice: number;
+  name: string;
+  description: string;
+  image: string;
+  price: number;
   imagePath: string;
+  stockQuantity: number;
 }
 
 export interface Order {

@@ -114,7 +114,7 @@ export default function ProductActions({ product }: { product: Product }) {
           </DialogHeader>
           <DialogDescription>
             {product.imagePath ? (
-              <img src={product.imagePath} alt={product.productName} />
+              <img src={product.imagePath} alt={product.name} />
             ) : (
               "No image available"
             )}

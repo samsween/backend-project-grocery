@@ -1,5 +1,6 @@
 const Order = require("../models/Order");
 const Product = require("../models/Product");
+const User = require("../models/User");
 
 const orderController = {
   getAllOrders: async (req, res) => {
@@ -8,13 +9,9 @@ const orderController = {
         "product",
         "user",
       ]);
-      // .select(
-      //   "orderNumber orderDate customerNumber productCode productName productPrice productQuantity totalAmount modeOfPayment"
-      // );
-      console.log(orders);
       res.json(orders);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ error: error.message, success: false });
     }
   },
   getOneOrder: async (req, res) => {
@@ -25,7 +22,7 @@ const orderController = {
       ]);
       res.json(order);
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ error: error.message, success: false });
     }
   },
   deleteOrder: async (req, res) => {
@@ -33,7 +30,7 @@ const orderController = {
       await Order.findByIdAndDelete(req.params.id);
       res.json({ message: "Order deleted" });
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ error: error.message, success: false });
     }
   },
 };

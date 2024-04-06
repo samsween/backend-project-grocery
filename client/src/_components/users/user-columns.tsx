@@ -1,11 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Product } from "../../types/types";
-import ProductActions from "./product-actions";
+import { User } from "../../types/types";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
-
-export const productColumns: ColumnDef<Product>[] = [
+import UserActions from "./user-actions";
+export const userColumns: ColumnDef<User>[] = [
   {
     header: ({ column }) => {
       return (
@@ -13,27 +12,52 @@ export const productColumns: ColumnDef<Product>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Name
+          Id
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+    accessorKey: "_id",
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Username
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+    accessorKey: "username",
+  },
+  {
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Full Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+    accessorKey: "firstName",
     cell: (row) => {
-      return (
-        <div className="flex items-center">
-          {row.row.original.imagePath && (
-            <img
-              src={row.row.original.imagePath}
-              alt={row.row.original.name}
-              className="h-8 w-8 "
-            />
-          )}
-          <span className="ml-2">{row.row.original.name}</span>
-        </div>
-      );
+      return `${row.row.original.firstName} ${row.row.original.lastName}`;
     },
-
-    accessorKey: "name",
   },
   {
     header: ({ column }) => {
@@ -42,12 +66,15 @@ export const productColumns: ColumnDef<Product>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Description
+          Email
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    accessorKey: "description",
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+    accessorKey: "email",
   },
   {
     header: ({ column }) => {
@@ -56,31 +83,21 @@ export const productColumns: ColumnDef<Product>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Price
+          Role
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    accessorKey: "price",
-  },
-  {
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Stock Quantity
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
     },
-    accessorKey: "stockQuantity",
+    accessorKey: "role",
   },
   {
     header: "Actions",
+    enableGlobalFilter: false,
     cell: (row) => {
-      return <ProductActions product={row.row.original} />;
+      return <UserActions user={row.row.original} />;
     },
   },
 ];

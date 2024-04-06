@@ -1,56 +1,47 @@
-const Employee = require("../models/Employee");
+const User = require("../models/User");
 const { signJwt } = require("../utils/jwt");
 const authController = {
   register: async (req, res) => {
     try {
-      const employee = new Employee(req.body);
-      await employee.save();
-      res.status(201).json(employee);
+      const User = new User({ ...req.body });
+      res.status(201).json({ message: "User created", success: true });
     } catch (error) {
-      res.status(400).json({ message: error.message });
+      res.status(400).json({ error: error.message });
     }
   },
   login: async (req, res) => {
     try {
-      const employee = await Employee.findOne({
-        username: req.body.username,
-      });
-      console.log(employee);
-      if (!employee) {
+      console.log(req.body);
+      const user = await User.findOne({ username: req.body.username });
+      if (!user) {
         return res
           .status(400)
-          .json({ message: "Incorrect username/password", success: false });
+          .json({ error: "Incorrect username/password", success: false });
       }
-      const validPassword = employee.comparePassword(req.body.password);
+      const validPassword = user.comparePassword(req.body.password);
       if (!validPassword) {
         return res
           .status(400)
-          .json({ message: "Incorrect username/password", success: false });
+          .json({ error: "Incorrect username/password", success: false });
       }
-
-      // TODO: Add emp role
       const token = signJwt({
-        id: employee._id,
-        username: employee.username,
+        id: user._id,
+        username: user.username,
+        role: user.role,
       });
-      console.log(token);
       return res
-        .status(200)
         .cookie("token", token, {
           httpOnly: false,
           secure: false,
           maxAge: 1000 * 60 * 60,
         })
-        .json({
-          id: employee._id,
-          username: employee.username,
-        });
+        .json({ success: true });
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(400).json({ error: error.message, success: false });
     }
   },
   logout: (req, res) => {
-    res.clearCookie("token").json({ message: "Logged out" });
+    res.clearCookie("token").json({ message: "Logged out", success: true });
   },
   getAuth: async (req, res) => {
     res.status(200).json(req.user);

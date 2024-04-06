@@ -1,72 +1,72 @@
 [
   {
-    "name": "Swift 3",
-    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "name": "Vortex 8",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image": "1.jpg",
-    "price": 55,
-    "stockQuantity": 3
-  },
-  {
-    "name": "Cosmic 8",
-    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image": "2.jpg",
-    "price": 55,
-    "stockQuantity": 3
-  },
-  {
-    "name": "Swift 6",
-    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "image": "3.jpg",
-    "price": 99,
-    "stockQuantity": 2
-  },
-  {
-    "name": "Urban 4",
-    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image": "4.jpg",
-    "price": 88,
-    "stockQuantity": 3
-  },
-  {
-    "name": "Mystic 4",
-    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "image": "5.jpg",
-    "price": 41,
-    "stockQuantity": 3
-  },
-  {
-    "name": "Vortex 3",
-    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "image": "6.jpg",
-    "price": 86,
-    "stockQuantity": 5
-  },
-  {
-    "name": "Eternal 3",
-    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "image": "7.jpg",
-    "price": 70,
-    "stockQuantity": 6
-  },
-  {
-    "name": "Dynamic 1",
-    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "image": "8.jpg",
-    "price": 42,
-    "stockQuantity": 3
-  },
-  {
-    "name": "Cosmic 9",
-    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "image": "9.jpg",
-    "price": 28,
+    "price": 78,
     "stockQuantity": 8
   },
   {
-    "name": "Urban 9",
+    "name": "Rebel 4",
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image": "2.jpg",
+    "price": 66,
+    "stockQuantity": 2
+  },
+  {
+    "name": "Urban 5",
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "image": "3.jpg",
+    "price": 19,
+    "stockQuantity": 7
+  },
+  {
+    "name": "Dynamic 5",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "image": "4.jpg",
+    "price": 27,
+    "stockQuantity": 3
+  },
+  {
+    "name": "Swift 3",
+    "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "image": "5.jpg",
+    "price": 57,
+    "stockQuantity": 10
+  },
+  {
+    "name": "Cosmic 4",
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image": "6.jpg",
+    "price": 22,
+    "stockQuantity": 3
+  },
+  {
+    "name": "Dynamic 0",
+    "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "image": "7.jpg",
+    "price": 10,
+    "stockQuantity": 4
+  },
+  {
+    "name": "Vortex 5",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "image": "8.jpg",
+    "price": 91,
+    "stockQuantity": 10
+  },
+  {
+    "name": "Dynamic 8",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "image": "9.jpg",
+    "price": 17,
+    "stockQuantity": 6
+  },
+  {
+    "name": "Infinite 7",
     "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "image": "10.jpg",
-    "price": 55,
-    "stockQuantity": 6
+    "price": 31,
+    "stockQuantity": 7
   }
 ]

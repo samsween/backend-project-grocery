@@ -18,8 +18,8 @@ const Login = () => {
   const user = useAuth();
   const loginUser = async () => {
     user.login({
-      username: "Luc45",
-      password: "AxGP7831@!",
+      username: "HeidiGarcia2",
+      password: "password",
     });
   };
   return (
