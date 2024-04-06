@@ -1,12 +1,13 @@
-import { Cart, CartProduct, useCart } from "@/providers/cartProivder";
+import { useCart } from "@/providers/cartProivder";
+import { Product } from "@/types/types";
 
 export const useCartHook = () => {
   const cart = useCart();
   const total = Object.values(cart?.cart?.products ?? {}).reduce(
-    (acc, product) => acc + product.productPrice * (product.quantity ?? 1),
+    (acc, product) => acc + product.price * (product.quantity ?? 1),
     0
   );
-  const addToCart = (data: CartProduct, quantity = 1) => {
+  const addToCart = (data: Product, quantity = 1) => {
     cart?.setCart((prevCart) => {
       console.log(prevCart);
       if (!prevCart) {
@@ -14,7 +15,7 @@ export const useCartHook = () => {
           products: {
             [data._id]: { ...data, quantity: quantity },
           },
-          total: data.productPrice,
+          total: data.price * quantity,
         };
       }
       let newCart = { ...prevCart };

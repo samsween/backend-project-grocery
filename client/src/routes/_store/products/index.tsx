@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Product } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowUpDown } from "lucide-react";
@@ -19,11 +20,11 @@ export const Route = createFileRoute("/_store/products/")({
 
 const sortFunctions = {
   price: {
-    asc: (a: any, b: any) => {
-      return b.productPrice - a.productPrice;
+    asc: (a: Product, b: Product) => {
+      return b.price - a.price;
     },
-    dsc: (a: any, b: any) => {
-      return a.productPrice - b.productPrice;
+    dsc: (a: Product, b: Product) => {
+      return a.price - b.price;
     },
   },
   default: {
@@ -33,7 +34,7 @@ const sortFunctions = {
 };
 
 const Products = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<Product[]>({
     queryFn: getProducts,
     queryKey: ["products-store"],
   });
@@ -95,7 +96,7 @@ const Products = () => {
         </div>
       </div>
       <div className="grid grid-cols-4 py-10 gap-10">
-        {sortData?.map((product: any) => {
+        {sortData?.map((product: Product) => {
           return (
             <Card className="w-full max-w-xs rounded-xl border width">
               <Link
@@ -116,13 +117,13 @@ const Products = () => {
                   </div>
                   <div className="grid gap-1.5">
                     <h3 className="font-semibold text-sm md:text-base">
-                      {product.productName}
+                      {product.name}
                     </h3>
                     <p className="font-semibold text-sm md:text-base">
-                      ${product.productPrice}
+                      ${product.price.toFixed(2)}
                     </p>
                     <p className="text-sm md:text-gray-500 text-muted">
-                      Stylish and comfortable tee for everyday wear
+                      {product.description}
                     </p>
                   </div>
                 </div>
