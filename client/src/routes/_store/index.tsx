@@ -10,6 +10,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_store/")({
   component: () => <Store />,
+  notFoundComponent: () => <div>Not founds</div>,
 });
 
 const Store = () => {

@@ -14,32 +14,27 @@ import { useForm } from "react-hook-form";
 import { Product } from "@/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { editProduct } from "@/api/products";
+import { ChangeEvent, useState } from "react";
 
 const formSchema = z.object({
-  productCode: z.string(),
-  productName: z.string(),
-  productQuantity: z.number(),
-  productPrice: z.number(),
+  name: z.string(),
+  description: z.string(),
+  price: z.number(),
+  stockQuantity: z.number(),
   image: z
     .instanceof(FileList)
     .refine((file) => file?.length == 1, "File is required.")
     .optional(),
 });
 
-export const ProductForm = ({
-  product,
-  setOpen,
-}: {
-  product: Product;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+export const ProductForm = ({ product }: { product: Product }) => {
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
-      productCode: product?.productCode.toString() ?? "",
-      productName: product.productName,
-      productQuantity: product.productQuantity,
-      productPrice: product.productPrice,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      stockQuantity: product.stockQuantity,
     },
   });
   const { mutateAsync } = useMutation({
@@ -49,28 +44,47 @@ export const ProductForm = ({
       queryClient.invalidateQueries({
         queryKey: ["products"],
       });
-      setOpen(false);
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData = new FormData();
-    formData.append("productCode", values.productCode);
-    formData.append("productName", values.productName);
-    formData.append("productPrice", values.productPrice.toString());
-    formData.append("productQuantity", values.productQuantity.toString());
+    formData.append("name", values.name);
+    formData.append("description", values.description);
+    formData.append("price", values.price.toString());
+    formData.append("stockQuantity", values.stockQuantity.toString());
     if (values.image) {
       formData.append("image", values.image[0]);
     }
     await mutateAsync({ id: product._id, product: formData });
   }
+
+  function getImageData(event: ChangeEvent<HTMLInputElement>) {
+    // FileList is immutable, so we need to create a new one
+    const dataTransfer = new DataTransfer();
+
+    // Add newly uploaded images
+    Array.from(event.target.files!).forEach((image) =>
+      dataTransfer.items.add(image)
+    );
+
+    const files = dataTransfer.files;
+    const displayUrl = URL.createObjectURL(event.target.files![0]);
+
+    return { files, displayUrl };
+  }
+  const [preview, setPreview] = useState(product.imagePath);
+
   const fileRef = form.register("image");
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 w-full p-8 bg-white shadow"
+      >
         <FormField
           control={form.control}
-          name="productCode"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Product Code</FormLabel>
@@ -84,10 +98,10 @@ export const ProductForm = ({
         />
         <FormField
           control={form.control}
-          name="productName"
+          name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Product Name</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -96,48 +110,62 @@ export const ProductForm = ({
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="productQuantity"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Product Quantity</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
+        <div className="flex gap-4 w-full">
+          <FormField
+            control={form.control}
+            name="price"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Price</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="productPrice"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Product Price</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="stockQuantity"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Stock Quantity</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="image"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Image</FormLabel>
+              <img src={preview} className="w-40" />
               <FormControl>
-                <Input type="file" placeholder="Image" {...fileRef} />
+                <Input
+                  type="file"
+                  placeholder="Image"
+                  className="appearance-none"
+                  {...fileRef}
+                  onChange={(event) => {
+                    const { files, displayUrl } = getImageData(event);
+                    console.log(displayUrl);
+                    setPreview(displayUrl);
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <img className="w-16 h-16" src={product.imagePath} />
+
         <FormDescription>
           Please enter the details of the product.
         </FormDescription>

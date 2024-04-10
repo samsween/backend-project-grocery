@@ -1,6 +1,11 @@
-const API_URL = "http://localhost:3000/api";
+import { API_URL } from "./constants";
 
-const getProducts = async () => {
+
+const getProducts = async (category: string | null = null) => {
+  if (category) {
+    const response = await fetch(`${API_URL}/products?category=${category}`);
+    return response.json();
+  }
   const response = await fetch(`${API_URL}/products`);
   return response.json();
 };

@@ -6,7 +6,7 @@ import { DataTable } from "../data-table";
 export default function Products() {
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
-    queryFn: getProducts,
+    queryFn: () => getProducts(),
   });
   console.log(data);
 

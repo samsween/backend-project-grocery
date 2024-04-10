@@ -11,7 +11,6 @@ const useAuth = () => {
   const { data: user, isLoading } = useQuery({
     queryFn: getAuth,
     queryKey: ["auth"],
-    enabled: !isLoggedIn(),
   });
 
   const { mutateAsync: login } = useMutation({

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api";
+import { API_URL } from "./constants";
 
 const signIn = async (user: { username: string; password: string }) => {
   console.log(user.username + " " + user.password);

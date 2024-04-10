@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const Category = require("../models/Category");
 const fs = require("fs");
 
 const deleteFile = async (filename) => {
@@ -10,6 +11,26 @@ const deleteFile = async (filename) => {
 const productController = {
   getAllProducts: async (req, res) => {
     try {
+      console.log(req.query);
+      if (req.query.category) {
+        const categoryID = await Category.findOne({
+          name: req.query.category,
+        }).select("_id");
+        console.log(categoryID);
+        const products = await Product.find({
+          category: categoryID._id,
+        });
+        console.log(products);
+        const productsWithImagePath = products.map((product) => {
+          return {
+            ...product._doc,
+            imagePath: product.image
+              ? `http://localhost:3000/images/${product.image}`
+              : null,
+          };
+        });
+        return res.json(productsWithImagePath);
+      }
       const products = await Product.find({}, { __v: 0 });
       const productsWithImagePath = products.map((product) => {
         return {
@@ -47,16 +68,19 @@ const productController = {
     }
   },
   addProduct: async (req, res) => {
-    const imageName = req.file.filename;
-    console.log(req.file.filename);
-    const product = await Product.create({
-      name: req.body.name,
-      price: req.body.price,
-      description: req.body.description,
-      stockQuantity: req.body.stockQuantity,
-      image: imageName,
-    });
-    res.json(product);
+    const imageName = req?.file?.filename;
+    try {
+      const product = await Product.create({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        stockQuantity: req.body.stockQuantity,
+        image: imageName,
+      });
+      res.json(product);
+    } catch (error) {
+      res.status(500).json({ error: error.message, success: false });
+    }
   },
   editProduct: async (req, res) => {
     const imageName = req.file?.filename;

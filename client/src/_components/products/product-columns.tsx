@@ -4,6 +4,7 @@ import { Product } from "../../types/types";
 import ProductActions from "./product-actions";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -20,15 +21,21 @@ export const productColumns: ColumnDef<Product>[] = [
     },
     cell: (row) => {
       return (
-        <div className="flex items-center">
+        <div className="flex gap-2 items-center">
           {row.row.original.imagePath && (
             <img
               src={row.row.original.imagePath}
               alt={row.row.original.name}
-              className="h-8 w-8 "
+              className="h-10 w-10 border "
             />
           )}
-          <span className="ml-2">{row.row.original.name}</span>
+          <Link
+            to="/admin/products/$id"
+            className="hover:underline"
+            params={{ id: row.row.original._id }}
+          >
+            {row.row.original.name}
+          </Link>
         </div>
       );
     },

@@ -22,18 +22,15 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProduct } from "@/api/products";
 import { MoreVertical } from "lucide-react";
-import { ProductForm } from "./edit-product";
 
 export default function ProductActions({ product }: { product: Product }) {
   const queryClient = useQueryClient();
   const [isDeleteOpen, setisDeleteOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
   const { mutateAsync, isPending } = useMutation({
     mutationFn: deleteProduct,
@@ -73,13 +70,6 @@ export default function ProductActions({ product }: { product: Product }) {
           <MoreVertical />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem
-            onClick={() => {
-              setIsEditOpen(true);
-            }}
-          >
-            Edit
-          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => {
@@ -99,14 +89,7 @@ export default function ProductActions({ product }: { product: Product }) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit Product Details</DialogTitle>
-          </DialogHeader>
-          <ProductForm product={product} setOpen={setIsEditOpen} />
-        </DialogContent>
-      </Dialog>
+
       <Dialog open={isImageOpen} onOpenChange={setIsImageOpen}>
         <DialogContent>
           <DialogHeader>

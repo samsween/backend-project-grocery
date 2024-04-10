@@ -10,8 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { AddProductForm } from "@/_components/products/add-product-form";
 import { Button } from "@/components/ui/button";
-
-export const Route = createFileRoute("/admin/products")({
+export const Route = createFileRoute("/admin/products/")({
   component: () => <ProductPage />,
 });
 
