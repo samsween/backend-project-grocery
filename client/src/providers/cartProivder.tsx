@@ -1,16 +1,16 @@
+import { getCart } from "@/api/cart";
 import { Product } from "@/types/types";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { createContext, useContext, useEffect } from "react";
 
-export type CartProduct = Product & {
-  quantity: number | null;
-};
-export type Cart = {
-  products: { [key: string]: CartProduct };
+export type CartProduct = {
+  product: Product;
+  quantity: number;
 };
 
 export type CartContext = {
-  cart: Cart | null;
-  setCart: React.Dispatch<React.SetStateAction<Cart | null>>;
+  cart: CartProduct[] | null;
+  isLoading: boolean;
 };
 
 const CartContext = createContext<CartContext | undefined>(undefined);
@@ -20,27 +20,20 @@ export const CartContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [cart, setCart] = useState<Cart | null>(null);
-  useEffect(() => {
-    const cart = localStorage.getItem("cart");
-    if (cart) {
-      console.log("ls", JSON.parse(cart));
-      setCart(JSON.parse(cart));
-    }
-  }, []);
-  useEffect(() => {
-    if (cart) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart]);
+  let { data: cart, isLoading } = useQuery({
+    queryFn: getCart,
+    queryKey: ["cart"],
+  });
   return (
-    <CartContext.Provider value={{ cart, setCart }}>
+    <CartContext.Provider
+      value={{ cart: cart?.length ? cart : null, isLoading }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
-export function useCart(): CartContext | undefined {
+export function useCart(): CartContext {
   const context = useContext(CartContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within a AuthProvider");

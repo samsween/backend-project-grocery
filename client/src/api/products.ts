@@ -1,6 +1,5 @@
 import { API_URL } from "./constants";
 
-
 const getProducts = async (category: string | null = null) => {
   if (category) {
     const response = await fetch(`${API_URL}/products?category=${category}`);
@@ -28,7 +27,7 @@ const addProduct = async (product: any) => {
   });
   return res.json();
 };
-const editProduct = async (product: { id: string; product: any }) => {
+const editProduct = async (product: { id: string; product: FormData }) => {
   const response = await fetch(`${API_URL}/products/${product.id}`, {
     method: "PUT",
     body: product.product,

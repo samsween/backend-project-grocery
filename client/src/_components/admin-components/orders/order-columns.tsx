@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Order } from "../../types/types";
+import { Order } from "../../../types/types";
 import OrderActions from "./order-actions";
 
 /*

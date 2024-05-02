@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const Category = require("../models/Category");
 const fs = require("fs");
+const { addImagePaths, addImagePath } = require("../utils/imagePaths");
 
 const deleteFile = async (filename) => {
   await fs.unlink(filename, (err) => {
@@ -11,7 +12,6 @@ const deleteFile = async (filename) => {
 const productController = {
   getAllProducts: async (req, res) => {
     try {
-      console.log(req.query);
       if (req.query.category) {
         const categoryID = await Category.findOne({
           name: req.query.category,
@@ -19,27 +19,12 @@ const productController = {
         console.log(categoryID);
         const products = await Product.find({
           category: categoryID._id,
-        });
-        console.log(products);
-        const productsWithImagePath = products.map((product) => {
-          return {
-            ...product._doc,
-            imagePath: product.image
-              ? `http://localhost:3000/images/${product.image}`
-              : null,
-          };
-        });
+        }).populate("category");
+        const productsWithImagePath = addImagePaths(products);
         return res.json(productsWithImagePath);
       }
       const products = await Product.find({}, { __v: 0 });
-      const productsWithImagePath = products.map((product) => {
-        return {
-          ...product._doc,
-          imagePath: product.image
-            ? `http://localhost:3000/images/${product.image}`
-            : null,
-        };
-      });
+      const productsWithImagePath = addImagePaths(products);
       res.json(productsWithImagePath);
     } catch (error) {
       res.status(500).json({ error: error.message, success: false });
@@ -47,13 +32,10 @@ const productController = {
   },
   getOneProduct: async (req, res) => {
     try {
-      const product = await Product.findById(req.params.id);
-      const productWithImagePath = {
-        ...product._doc,
-        imagePath: product.image
-          ? `http://localhost:3000/images/${product.image}`
-          : null,
-      };
+      const product = await Product.findById(req.params.id).populate(
+        "category"
+      );
+      const productWithImagePath = addImagePath(product);
       return res.json(productWithImagePath);
     } catch (error) {
       return res.status(500).json({ error: error.message, success: false });

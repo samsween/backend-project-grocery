@@ -19,9 +19,9 @@ const Product = () => {
     queryFn: async () => getProduct(id),
   });
   const cart = useCartHook();
-  const addToCart = () => {
+  const addProdToCart = async () => {
     if (!product) return;
-    cart.addToCart(product);
+    await cart.addCart(product._id);
     toast({
       title: "Added to cart!",
       description: (
@@ -50,16 +50,11 @@ const Product = () => {
         <div className="p-8 flex flex-col gap-4 w-full">
           <h1 className="text-3xl font-semibold">{product.name}</h1>
           <p>ID: {product._id}</p>
-          <h3 className="text-xl">${product.price.toFixed(2)}</h3>
-          <Button className="w-full" variant="outline" onClick={addToCart}>
+          <h3 className="text-xl">${product?.price?.toFixed(2)}</h3>
+          <Button className="w-full" variant="outline" onClick={addProdToCart}>
             Add To Cart
           </Button>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
-            facere laudantium magni error explicabo hic cum. Maiores ratione,
-            sit reiciendis, autem odit vitae eaque non excepturi minus repellat
-            repudiandae totam!
-          </p>
+          <p>{product.description}</p>
         </div>
       </div>
     </main>

@@ -1,4 +1,4 @@
-import { Layout } from "@/_components/layout";
+import { Layout } from "@/_components/admin-components/layout";
 import { isLoggedIn } from "@/hooks/useAuth";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 

@@ -1,17 +1,6 @@
-import { ProductCard } from "@/_components/product-card";
+import { CartDrawer } from "@/_components/store-components/cart/cart-drawer";
+import { CartIndicator } from "@/_components/store-components/cart/cart-indicator";
 import { getCategories } from "@/api/categories";
-import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
-import useAuth from "@/hooks/useAuth";
-import { useCartHook } from "@/hooks/useCart";
 import { CartContextProvider } from "@/providers/cartProivder";
 import { Category } from "@/types/types";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
@@ -46,9 +35,7 @@ const StoreLayout = () => {
 };
 
 const Header = ({ categories }: { categories: Category[] }) => {
-  const cart = useCartHook();
   const [cartOpen, setCartOpen] = useState<boolean>(false);
-  const { user } = useAuth();
   return (
     <>
       <header className="w-full py-8 bg-white shadow">
@@ -73,9 +60,8 @@ const Header = ({ categories }: { categories: Category[] }) => {
                 className="relative cursor-pointer"
                 onClick={() => setCartOpen(true)}
               >
-                {cart.cart?.cart?.products && (
-                  <div className="absolute h-2 text-white w-2 -right-1 -top-1 bg-red-500 text-xs text-center rounded-full"></div>
-                )}
+                <CartIndicator />
+
                 <ShoppingCart />
               </li>
               <li>
@@ -85,29 +71,7 @@ const Header = ({ categories }: { categories: Category[] }) => {
           </div>
         </div>
       </header>
-      <Drawer open={cartOpen} onOpenChange={setCartOpen}>
-        <DrawerContent className="container mx-auto">
-          <DrawerHeader>
-            <DrawerTitle className="text-4xl">
-              Total ${cart.total.toFixed(2)}
-            </DrawerTitle>
-
-            <DrawerDescription className="flex gap-2 overflow-x-scroll">
-              {Object.values(cart.cart?.cart?.products || {}).map(
-                (product, i) => (
-                  <ProductCard key={i} product={product} />
-                )
-              )}
-            </DrawerDescription>
-          </DrawerHeader>
-          <DrawerFooter>
-            <Button>Checkout</Button>
-            <DrawerClose>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+      <CartDrawer open={cartOpen} setOpen={setCartOpen} />
     </>
   );
 };

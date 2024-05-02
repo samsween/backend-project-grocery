@@ -28,6 +28,7 @@ export interface Product {
   price: number;
   imagePath: string;
   stockQuantity: number;
+  category: Category;
 }
 
 export interface Order {

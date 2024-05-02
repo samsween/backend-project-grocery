@@ -1,4 +1,4 @@
-import { ProductForm } from "@/_components/products/edit-product";
+import { ProductForm } from "@/_components/admin-components/products/edit-product";
 import { getProduct } from "@/api/products";
 import { Button } from "@/components/ui/button";
 import { Product as TProduct } from "@/types/types";

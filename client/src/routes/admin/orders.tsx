@@ -1,4 +1,4 @@
-import Orders from "@/_components/orders";
+import Orders from "@/_components/admin-components/orders";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin/orders")({

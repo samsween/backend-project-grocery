@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Products from "@/_components/products";
+import Products from "@/_components/admin-components/products";
 import { PlusCircleIcon } from "lucide-react";
 import { useState } from "react";
 import {
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { AddProductForm } from "@/_components/products/add-product-form";
+import { AddProductForm } from "@/_components/admin-components/products/add-product-form";
 import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/admin/products/")({
   component: () => <ProductPage />,

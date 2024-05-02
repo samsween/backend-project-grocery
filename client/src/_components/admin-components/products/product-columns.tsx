@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Product } from "../../types/types";
+import { Product } from "../../../types/types";
 import ProductActions from "./product-actions";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
