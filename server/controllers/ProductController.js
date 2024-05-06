@@ -41,6 +41,23 @@ const productController = {
       return res.status(500).json({ error: error.message, success: false });
     }
   },
+  getFeatured: async (req, res) => {
+    try {
+      const products = await Product.find({
+        featured: true,
+      });
+
+      const productWithImagePaths = addImagePaths(products);
+      console.log(productWithImagePaths);
+      res.json(productWithImagePaths);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        error: error.message,
+        success: false,
+      });
+    }
+  },
   deleteProduct: async (req, res) => {
     try {
       await Product.findByIdAndDelete(req.params.id);
@@ -65,6 +82,7 @@ const productController = {
     }
   },
   editProduct: async (req, res) => {
+    console.log(req);
     const imageName = req.file?.filename;
     if (imageName) {
       const prevImageName = await Product.findById(req.params.id);

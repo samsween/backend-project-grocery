@@ -18,6 +18,11 @@ export const Route = createFileRoute("/admin/products/$id")({
 const Product = () => {
   const product: TProduct = Route.useLoaderData();
   const router = useRouter();
+  // const { id } = Route.useParams();
+  // const { data: product } = useQuery<TProduct>({
+  //   queryKey: ["product", id],
+  //   queryFn: () => getProduct(id),
+  // });
   const goBack = () => router.history.back();
   return (
     <main className="w-full h-full flex items-center justify-center">
@@ -27,10 +32,10 @@ const Product = () => {
             <ArrowLeft />
           </Button>
 
-          <h1 className="font-bold text-2xl">Editing {product.name}</h1>
+          <h1 className="font-bold text-2xl">Editing {product?.name}</h1>
         </div>
 
-        <ProductForm product={product} />
+        {product && <ProductForm product={product} />}
       </div>
     </main>
   );

@@ -76,9 +76,6 @@ export function AddProductForm({
               <FormControl>
                 <Input placeholder="9" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -125,7 +122,7 @@ export function AddProductForm({
         <FormField
           control={form.control}
           name="image"
-          render={({ field }) => (
+          render={({}) => (
             <FormItem>
               <FormLabel>Image</FormLabel>
               <FormControl>

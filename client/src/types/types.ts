@@ -29,6 +29,7 @@ export interface Product {
   imagePath: string;
   stockQuantity: number;
   category: Category;
+  featured: boolean
 }
 
 export interface Order {

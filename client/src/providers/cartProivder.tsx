@@ -1,7 +1,7 @@
 import { getCart } from "@/api/cart";
 import { Product } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext } from "react";
 
 export type CartProduct = {
   product: Product;

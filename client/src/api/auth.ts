@@ -1,16 +1,19 @@
 import { API_URL } from "./constants";
-
+import axios from "axios";
 const signIn = async (user: { username: string; password: string }) => {
   console.log(user.username + " " + user.password);
-  const response = await fetch(`${API_URL}/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(user),
+  // const response = await fetch(`${API_URL}/auth/login`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   credentials: "include",
+  //   body: JSON.stringify(user),
+  // });
+  const data = axios.post(`${API_URL}/auth/login`, user, {
+    withCredentials: true,
   });
-  return response.json();
+  return data;
 };
 
 const getAuth = async () => {

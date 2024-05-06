@@ -26,6 +26,10 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Category",
   },
+  featured: {
+    type: Boolean,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

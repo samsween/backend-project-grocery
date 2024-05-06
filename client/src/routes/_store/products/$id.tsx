@@ -15,7 +15,7 @@ const Product = () => {
   const { toast } = useToast();
 
   const { data: product, isLoading } = useQuery<ProductType>({
-    queryKey: [`product-${id}`],
+    queryKey: ["product", id],
     queryFn: async () => getProduct(id),
   });
   const cart = useCartHook();

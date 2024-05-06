@@ -20,6 +20,11 @@ const getProduct = async (id: string) => {
   return response.json();
 };
 
+const getFeatured = async () => {
+  const response = await fetch(`${API_URL}/products/featured`);
+  return response.json();
+};
+
 const addProduct = async (product: any) => {
   const res = await fetch(`${API_URL}/products`, {
     method: "POST",
@@ -35,4 +40,11 @@ const editProduct = async (product: { id: string; product: FormData }) => {
   return response.json();
 };
 
-export { getProducts, deleteProduct, getProduct, addProduct, editProduct };
+export {
+  getProducts,
+  deleteProduct,
+  getProduct,
+  addProduct,
+  editProduct,
+  getFeatured,
+};

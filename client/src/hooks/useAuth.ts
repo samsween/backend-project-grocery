@@ -1,5 +1,5 @@
-import { getAuth, logOut, signIn } from "@/api/auth";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { getAuth, logOut } from "@/api/auth";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 const isLoggedIn = async () => {
   const user = await getAuth();
@@ -13,18 +13,12 @@ const useAuth = () => {
     queryKey: ["auth"],
   });
 
-  const { mutateAsync: login } = useMutation({
-    mutationFn: signIn,
-    onSuccess: () => {
-      navigate({ to: "/admin" });
-    },
-  });
   const logout = async () => {
     await logOut();
     navigate({ to: "/login" });
   };
 
-  return { user, isLoading, login, logout };
+  return { user, isLoading, logout };
 };
 
 export { isLoggedIn };

@@ -6,6 +6,7 @@ const { addImagePath } = require("../utils/imagePaths");
 const cartController = {
   getCart: async (req, res) => {
     try {
+      if (!user._id) this
       const user = await User.findOne({
         _id: req.user.id,
       }).populate("cart.product");

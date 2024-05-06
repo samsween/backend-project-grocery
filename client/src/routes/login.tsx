@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import useAuth, { isLoggedIn } from "@/hooks/useAuth";
+import { LoginForm } from "@/_components/loginForm";
+import { isLoggedIn } from "@/hooks/useAuth";
 import { Link, createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/login")({
@@ -15,13 +13,6 @@ export const Route = createFileRoute("/login")({
 });
 
 const Login = () => {
-  const user = useAuth();
-  const loginUser = async () => {
-    user.login({
-      username: "HeidiGarcia2",
-      password: "password",
-    });
-  };
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-screen">
       <div className="flex items-center justify-center py-12">
@@ -32,41 +23,7 @@ const Login = () => {
               Enter your email below to login to your account
             </p>
           </div>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  href="/forgot-password"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-              <Input id="password" type="password" required />
-            </div>
-            <Button
-              type="submit"
-              className="w-full"
-              onClick={() => {
-                loginUser();
-              }}
-            >
-              Login
-            </Button>
-            <Button variant="outline" className="w-full">
-              Login with Google
-            </Button>
-          </div>
+          <LoginForm />
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="#" className="underline">

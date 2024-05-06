@@ -7,8 +7,10 @@ const upload = require("../../middleware/image");
 // const upload = multer({ storage: storage });
 
 router.get("/", productController.getAllProducts);
+router.get("/featured", productController.getFeatured);
 router.get("/:id", productController.getOneProduct);
 router.delete("/:id", productController.deleteProduct);
+
 router.post("/", upload.single("image"), productController.addProduct);
 router.put("/:id", upload.single("image"), productController.editProduct);
 

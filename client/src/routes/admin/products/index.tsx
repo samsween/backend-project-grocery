@@ -27,7 +27,7 @@ const ProductPage = () => {
           onClick={() => {
             setOpen(true);
           }}
-          className="fixed bottom-10 right-10 text-white cursor-pointer flex gap-2"
+          className="fixed bottom-10 right-10 text-white dark:text-black cursor-pointer flex gap-2"
         >
           <PlusCircleIcon className="h-6 w-6" />
           Add Product

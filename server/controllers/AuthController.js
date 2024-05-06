@@ -15,13 +15,13 @@ const authController = {
       const user = await User.findOne({ username: req.body.username });
       if (!user) {
         return res
-          .status(400)
+          .status(403)
           .json({ error: "Incorrect username/password", success: false });
       }
       const validPassword = user.comparePassword(req.body.password);
       if (!validPassword) {
         return res
-          .status(400)
+          .status(403)
           .json({ error: "Incorrect username/password", success: false });
       }
       const token = signJwt({

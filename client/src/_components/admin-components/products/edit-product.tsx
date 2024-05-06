@@ -34,12 +34,24 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Spinner } from "@/_components/spinner";
+import { useRouter } from "@tanstack/react-router";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(2),
   description: z.string().min(4),
-  price: z.number().min(1),
-  stockQuantity: z.number().min(1),
+  price: z.coerce
+    .number({
+      invalid_type_error: "Not a number",
+    })
+    .gte(1, "Must be 1 and above"),
+  stockQuantity: z.coerce
+    .number({
+      invalid_type_error: "Not a number",
+    })
+    .gte(0, "Must be 0 and above"),
+  featured: z.string(),
   category: z.string(),
   image: z.any(),
 });
@@ -52,6 +64,8 @@ z
 
 export const ProductForm = ({ product }: { product: Product }) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const { toast } = useToast();
   const [isDeleteOpen, setisDeleteOpen] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
@@ -59,6 +73,7 @@ export const ProductForm = ({ product }: { product: Product }) => {
       description: product.description,
       price: product.price,
       stockQuantity: product.stockQuantity,
+      featured: product.featured.toString(),
       category: product.category._id,
     },
     resolver: zodResolver(formSchema),
@@ -71,12 +86,12 @@ export const ProductForm = ({ product }: { product: Product }) => {
       });
     },
   });
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending: isLoading } = useMutation({
     mutationFn: editProduct,
     mutationKey: ["edit-product"],
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["products"],
+        queryKey: ["product", product._id],
       });
     },
   });
@@ -90,11 +105,17 @@ export const ProductForm = ({ product }: { product: Product }) => {
     formData.append("name", values.name);
     formData.append("description", values.description);
     formData.append("price", values.price.toString());
+    formData.append("category", values.category);
     formData.append("stockQuantity", values.stockQuantity.toString());
+    formData.append("featured", values.featured);
     if (values.image) {
       formData.append("image", values.image[0]);
     }
     await mutateAsync({ id: product._id, product: formData });
+    toast({
+      title: `${product.name} updated`,
+    });
+    router.invalidate();
   }
 
   function getImageData(event: ChangeEvent<HTMLInputElement>) {
@@ -119,7 +140,7 @@ export const ProductForm = ({ product }: { product: Product }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full p-8 bg-white shadow"
+          className="space-y-8 w-full p-8 bg-background shadow"
         >
           <FormField
             control={form.control}
@@ -179,34 +200,64 @@ export const ProductForm = ({ product }: { product: Product }) => {
               )}
             />
           </div>
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Category</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={product.category._id}
-                  >
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Category?.map((c) => {
-                        return (
-                          <SelectItem key={c._id} value={c._id}>
-                            {c.name}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-              </FormItem>
-            )}
-          />
+          <div className="flex gap-4">
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={product.category._id}
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Category?.map((c) => {
+                          return (
+                            <SelectItem key={c._id} value={c._id}>
+                              {c.name}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="featured"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Featured</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={product.featured.toString()}
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {[true, false]?.map((t) => {
+                          return (
+                            <SelectItem key={t.toString()} value={t.toString()}>
+                              {t.toString()}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
 
           <FormField
             control={form.control}
@@ -237,9 +288,13 @@ export const ProductForm = ({ product }: { product: Product }) => {
             Please enter the details of the product.
           </FormDescription>
           <div className="flex w-full gap-4 items-center">
-            <Button type="submit" className="">
-              Edit
-            </Button>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Button type="submit" className="" disabled={isLoading}>
+                Edit
+              </Button>
+            )}
             <Button
               variant={"destructive"}
               type="button"

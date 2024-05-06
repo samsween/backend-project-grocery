@@ -4,69 +4,79 @@
     "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image": "1.jpg",
     "price": 78,
-    "stockQuantity": 8
+    "stockQuantity": 8,
+    "featured": true
   },
   {
     "name": "Rebel 4",
     "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "image": "2.jpg",
     "price": 66,
-    "stockQuantity": 2
+    "stockQuantity": 2,
+    "featured": true
   },
   {
     "name": "Urban 5",
     "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "image": "3.jpg",
     "price": 19,
-    "stockQuantity": 7
+    "stockQuantity": 7,
+    "featured": true
   },
   {
     "name": "Dynamic 5",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "image": "4.jpg",
     "price": 27,
-    "stockQuantity": 3
+    "stockQuantity": 3,
+    "featured": true
   },
   {
     "name": "Swift 3",
     "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "image": "5.jpg",
     "price": 57,
-    "stockQuantity": 10
+    "stockQuantity": 10,
+    "featured": true
   },
   {
     "name": "Cosmic 4",
     "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "image": "6.jpg",
     "price": 22,
-    "stockQuantity": 3
+    "stockQuantity": 3,
+    "featured": true
   },
   {
     "name": "Dynamic 0",
     "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "image": "7.jpg",
     "price": 10,
-    "stockQuantity": 4
+    "stockQuantity": 4,
+    "featured": false
   },
   {
     "name": "Vortex 5",
     "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image": "8.jpg",
     "price": 91,
-    "stockQuantity": 10
+    "stockQuantity": 10,
+     "featured": false
   },
   {
     "name": "Dynamic 8",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "image": "9.jpg",
     "price": 17,
-    "stockQuantity": 6
+    "stockQuantity": 6,
+     "featured": false
   },
   {
     "name": "Infinite 7",
     "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "image": "10.jpg",
     "price": 31,
-    "stockQuantity": 7
+    "stockQuantity": 7,
+     "featured": false
   }
 ]
