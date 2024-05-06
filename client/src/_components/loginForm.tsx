@@ -23,6 +23,7 @@ const formSchema = z.object({
 
 type ErrorResponse = {
   error: string;
+  success: boolean;
 };
 
 export const LoginForm = () => {
