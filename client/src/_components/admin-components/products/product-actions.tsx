@@ -70,7 +70,6 @@ export default function ProductActions({ product }: { product: Product }) {
           <MoreVertical />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => {
               setisDeleteOpen(true);
