@@ -1,3 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
 import { getProducts } from "@/api/products";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,15 +11,14 @@ import {
 } from "@/components/ui/select";
 import { Product } from "@/types/types";
 
-import { Link, createFileRoute, notFound } from "@tanstack/react-router";
+import { Link, notFound } from "@tanstack/react-router";
 import { ArrowUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
 
 type ErrorResponseType = {
   error: string;
 };
-
-export const Route = createFileRoute("/_store/index/$category")({
+export const Route = createFileRoute("/_store/$category")({
   loader: async ({ params: { category } }) => {
     const products: Product[] | ErrorResponseType = await getProducts(category);
     if (typeof products === "object" && "error" in products) {

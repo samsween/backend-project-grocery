@@ -18,7 +18,7 @@ import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as StoreIndexImport } from './routes/_store/index'
 import { Route as AdminUsersImport } from './routes/admin/users'
 import { Route as AdminOrdersImport } from './routes/admin/orders'
-import { Route as StoreIndexCategoryImport } from './routes/_store/index.$category'
+import { Route as StoreCategoryImport } from './routes/_store/$category'
 import { Route as AdminProductsIndexImport } from './routes/admin/products/index'
 import { Route as StoreProductsIndexImport } from './routes/_store/products/index'
 import { Route as AdminProductsIdImport } from './routes/admin/products/$id'
@@ -61,8 +61,8 @@ const AdminOrdersRoute = AdminOrdersImport.update({
   getParentRoute: () => AdminRoute,
 } as any)
 
-const StoreIndexCategoryRoute = StoreIndexCategoryImport.update({
-  path: '/index/$category',
+const StoreCategoryRoute = StoreCategoryImport.update({
+  path: '/$category',
   getParentRoute: () => StoreRoute,
 } as any)
 
@@ -102,6 +102,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/_store/$category': {
+      preLoaderRoute: typeof StoreCategoryImport
+      parentRoute: typeof StoreImport
+    }
     '/admin/orders': {
       preLoaderRoute: typeof AdminOrdersImport
       parentRoute: typeof AdminImport
@@ -134,10 +138,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProductsIndexImport
       parentRoute: typeof AdminImport
     }
-    '/_store/index/$category': {
-      preLoaderRoute: typeof StoreIndexCategoryImport
-      parentRoute: typeof StoreImport
-    }
   }
 }
 
@@ -145,10 +145,10 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   StoreRoute.addChildren([
+    StoreCategoryRoute,
     StoreIndexRoute,
     StoreProductsIdRoute,
     StoreProductsIndexRoute,
-    StoreIndexCategoryRoute,
   ]),
   AdminRoute.addChildren([
     AdminOrdersRoute,

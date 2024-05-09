@@ -36,6 +36,7 @@ const StoreLayout = () => {
 
 const Header = ({ categories }: { categories: Category[] }) => {
   const [cartOpen, setCartOpen] = useState<boolean>(false);
+
   return (
     <>
       <header className="w-full py-8 bg-white shadow">
@@ -47,7 +48,7 @@ const Header = ({ categories }: { categories: Category[] }) => {
             <ul className="flex gap-4 items-center">
               {categories.map((category) => (
                 <li key={category._id} className="hover:underline">
-                  <Link to={`/index/${category.name}`}>
+                  <Link to={`/${category.name}`}>
                     {category.name.toUpperCase()}
                   </Link>
                 </li>
