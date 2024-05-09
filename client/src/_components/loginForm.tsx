@@ -85,7 +85,7 @@ export const LoginForm = () => {
             <FormItem className="grid gap-2">
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="*******" {...field} />
+                <Input placeholder="*******" {...field} type="password" />
               </FormControl>
               <FormMessage className="text-xs" />
             </FormItem>
