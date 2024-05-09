@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_store/$category")({
   loader: async ({ params: { category } }) => {
     const products: Product[] | ErrorResponseType = await getProducts(category);
     if (typeof products === "object" && "error" in products) {
-      throw notFound({ routeId: "/_store/index/$category" });
+      throw notFound({ routeId: "/_store/$category" });
     }
     return { products };
   },
