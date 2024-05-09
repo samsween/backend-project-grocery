@@ -23,7 +23,7 @@ const productController = {
         const productsWithImagePath = addImagePaths(products);
         return res.json(productsWithImagePath);
       }
-      const products = await Product.find({}, { __v: 0 });
+      const products = await Product.find({}, { __v: 0 }).populate("category");
       const productsWithImagePath = addImagePaths(products);
       res.json(productsWithImagePath);
     } catch (error) {
