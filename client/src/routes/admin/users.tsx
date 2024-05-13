@@ -1,4 +1,4 @@
-import Users from "@/_components/admin-components/users";
+import Users from "@/_components/admin-components/users/table";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin/users")({

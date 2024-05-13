@@ -18,19 +18,25 @@ const StoreLayout = () => {
   const { categories } = Route.useLoaderData();
   return (
     <CartContextProvider>
-      <div>
-        <Header categories={categories} />
-        <div className="w-full h-full bg-slate-50">
-          <Outlet />
-        </div>
-
-        <footer className="w-full py-4 bg-gray-50 shadow">
-          <div className="container mx-auto">
-            <p className="text-center">© 2021 Store</p>
-          </div>
-        </footer>
-      </div>
+      <Layout categories={categories} />
     </CartContextProvider>
+  );
+};
+
+const Layout = ({ categories }: { categories: Category[] }) => {
+  return (
+    <>
+      <Header categories={categories} />
+      <div className="w-full h-full bg-slate-50">
+        <Outlet />
+      </div>
+
+      <footer className="w-full py-4 bg-gray-50 shadow">
+        <div className="container mx-auto">
+          <p className="text-center">© 2021 Store</p>
+        </div>
+      </footer>
+    </>
   );
 };
 

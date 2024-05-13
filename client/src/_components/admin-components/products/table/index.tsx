@@ -1,7 +1,7 @@
 import { getProducts } from "@/api/products";
 import { useQuery } from "@tanstack/react-query";
 import { productColumns } from "./product-columns";
-import { DataTable } from "../data-table";
+import { DataTable } from "../../data-table";
 
 export default function Products() {
   const { data, isLoading } = useQuery({

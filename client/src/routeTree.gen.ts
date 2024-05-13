@@ -18,6 +18,7 @@ import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as StoreIndexImport } from './routes/_store/index'
 import { Route as AdminUsersImport } from './routes/admin/users'
 import { Route as AdminOrdersImport } from './routes/admin/orders'
+import { Route as AdminCategoriesImport } from './routes/admin/categories'
 import { Route as StoreCategoryImport } from './routes/_store/$category'
 import { Route as AdminProductsIndexImport } from './routes/admin/products/index'
 import { Route as StoreProductsIndexImport } from './routes/_store/products/index'
@@ -58,6 +59,11 @@ const AdminUsersRoute = AdminUsersImport.update({
 
 const AdminOrdersRoute = AdminOrdersImport.update({
   path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+
+const AdminCategoriesRoute = AdminCategoriesImport.update({
+  path: '/categories',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -106,6 +112,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StoreCategoryImport
       parentRoute: typeof StoreImport
     }
+    '/admin/categories': {
+      preLoaderRoute: typeof AdminCategoriesImport
+      parentRoute: typeof AdminImport
+    }
     '/admin/orders': {
       preLoaderRoute: typeof AdminOrdersImport
       parentRoute: typeof AdminImport
@@ -151,6 +161,7 @@ export const routeTree = rootRoute.addChildren([
     StoreProductsIndexRoute,
   ]),
   AdminRoute.addChildren([
+    AdminCategoriesRoute,
     AdminOrdersRoute,
     AdminUsersRoute,
     AdminIndexRoute,

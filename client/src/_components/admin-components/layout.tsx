@@ -8,6 +8,7 @@ import useAuth from "@/hooks/useAuth";
 import { ThemeProvider } from "@/providers/themeProvider";
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import {
+  Folder,
   Home,
   LogOut,
   Package,
@@ -95,6 +96,18 @@ export const Layout = () => {
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="right">Users</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    to="/admin/categories"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  >
+                    <Folder className="h-5 w-5" />
+                    <span className="sr-only">Categories</span>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent side="right">Categories</TooltipContent>
               </Tooltip>
               <ModeToggle />
             </nav>

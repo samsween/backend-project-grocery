@@ -74,7 +74,7 @@ export const ProductForm = ({ product }: { product: Product }) => {
       price: product.price,
       stockQuantity: product.stockQuantity,
       featured: product.featured.toString(),
-      category: product.category._id,
+      category: product.category?._id || "",
     },
     resolver: zodResolver(formSchema),
   });
@@ -210,7 +210,7 @@ export const ProductForm = ({ product }: { product: Product }) => {
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={product.category._id}
+                      defaultValue={product.category?._id || ""}
                     >
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Category" />

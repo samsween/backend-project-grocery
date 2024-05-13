@@ -20,8 +20,7 @@ const categoryController = {
   },
   deleteCategory: async (req, res) => {
     try {
-      const category = await Category.findById(req.params.id);
-      await category.remove();
+      await Category.findOneAndDelete({ _id: req.params.id });
       res.json({ success: true });
     } catch (error) {
       res.status(500).json({ error: error.message, success: false });

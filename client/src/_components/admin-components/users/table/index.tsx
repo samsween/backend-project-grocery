@@ -1,5 +1,5 @@
 import { getUsers } from "@/api/users";
-import { DataTable } from "../data-table";
+import { DataTable } from "../../data-table";
 import { userColumns } from "./user-columns";
 import { useQuery } from "@tanstack/react-query";
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { DataTable } from "../data-table";
+import { DataTable } from "../../data-table";
 import { employeeColumns } from "./employee-columns";
 import { getEmployees } from "@/api/employees";
 
