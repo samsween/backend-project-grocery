@@ -17,10 +17,13 @@ const getCategory = async (id: string) => {
   return response.json();
 };
 
-const addCategory = async (category: any) => {
+const addCategory = async (name: string) => {
   const res = await fetch(`${API_URL}/categories`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
     method: "POST",
-    body: category,
+    body: JSON.stringify({ name }),
   });
   return res.json();
 };
