@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Employee } from "../../../../types/types";
+import { Employee } from "../../../../types/db-types";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import EmployeeActions from "./employee-actions";

@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Product } from "@/types/types";
+import { Product } from "@/types/db-types";
 
 import { Link, notFound } from "@tanstack/react-router";
 import { ArrowUpDown } from "lucide-react";

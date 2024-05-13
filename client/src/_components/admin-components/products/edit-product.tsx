@@ -11,7 +11,7 @@ import {
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Category, Product } from "@/types/types";
+import { Category, Product } from "@/types/db-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteProduct, editProduct } from "@/api/products";
 import { ChangeEvent, useState } from "react";

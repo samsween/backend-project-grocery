@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Product } from "@/types/types";
+import { Product } from "@/types/db-types";
 import { useQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowUpDown } from "lucide-react";
@@ -35,7 +35,7 @@ const sortFunctions = {
 
 const Products = () => {
   const { data, isLoading } = useQuery<Product[]>({
-    queryFn: ()=> getProducts(),
+    queryFn: () => getProducts(),
     queryKey: ["products-store"],
   });
   const [sort, setSort] = useState<"price" | "default">("default");

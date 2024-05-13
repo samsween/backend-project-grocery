@@ -17,7 +17,18 @@ connect().then(async () => {
   products.forEach((product) => {
     product.category = cats[Math.floor(Math.random() * cats.length)]._id;
   });
-  await User.create(users);
+  await User.create([
+    ...users,
+    {
+      username: "admin",
+      firstName: "admin",
+      lastName: "admin",
+      email: "admin@example.com",
+      password: "password",
+      role: "customer",
+      cart: [],
+    },
+  ]);
   await Product.create(products);
   console.log("Data seeded successfully");
   process.exit();

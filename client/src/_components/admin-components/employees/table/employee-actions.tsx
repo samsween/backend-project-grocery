@@ -1,4 +1,4 @@
-import { Employee } from "@/types/types";
+import { Employee } from "@/types/db-types";
 import {
   DropdownMenu,
   DropdownMenuContent,

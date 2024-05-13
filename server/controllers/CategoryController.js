@@ -23,6 +23,7 @@ const categoryController = {
       await Category.findOneAndDelete({ _id: req.params.id });
       res.json({ success: true });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: error.message, success: false });
     }
   },

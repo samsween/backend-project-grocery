@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Category } from "@/types/types";
+import { Category } from "@/types/db-types";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import CategoryActions from "./category-actions";

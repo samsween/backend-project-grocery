@@ -1,5 +1,5 @@
 import { getCart } from "@/api/cart";
-import { Product } from "@/types/types";
+import { Product } from "@/types/db-types";
 import { useQuery } from "@tanstack/react-query";
 import { createContext, useContext } from "react";
 

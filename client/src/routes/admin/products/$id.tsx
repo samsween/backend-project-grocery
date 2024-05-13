@@ -1,7 +1,7 @@
 import { ProductForm } from "@/_components/admin-components/products/edit-product";
 import { getProduct } from "@/api/products";
 import { Button } from "@/components/ui/button";
-import { Product as TProduct } from "@/types/types";
+import { Product as TProduct } from "@/types/db-types";
 import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 

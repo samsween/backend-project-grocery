@@ -17,8 +17,8 @@ import { z } from "zod";
 import { useNavigate } from "@tanstack/react-router";
 
 const formSchema = z.object({
-  username: z.string().min(4),
-  password: z.string().min(4),
+  username: z.string().min(2),
+  password: z.string().min(2),
 });
 
 type ErrorResponse = {

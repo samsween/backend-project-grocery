@@ -2,7 +2,7 @@ import { CartDrawer } from "@/_components/store-components/cart/cart-drawer";
 import { CartIndicator } from "@/_components/store-components/cart/cart-indicator";
 import { getCategories } from "@/api/categories";
 import { CartContextProvider } from "@/providers/cartProivder";
-import { Category } from "@/types/types";
+import { Category } from "@/types/db-types";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 import { ShoppingCart, User } from "lucide-react";
 import { useState } from "react";

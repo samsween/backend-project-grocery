@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-import { User } from "../../../../types/types";
+import { User } from "../../../../types/db-types";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import UserActions from "./user-actions";
